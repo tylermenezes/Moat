@@ -1,0 +1,165 @@
+@mixin rounded($topleft_or_all, $topright: null, $bottomright: null, $bottomleft: null) {
+
+    @if ($topright == null) {
+        $topright: $topleft_or_all;
+    }
+
+    @if ($bottomright == null) {
+        $bottomright: $topleft_or_all;
+    }
+
+    @if ($bottomleft == null) {
+        $bottomleft: $topleft_or_all;
+    }
+
+    -webkit-border-top-left-radius: $topleft_or_all;
+    -webkit-border-top-right-radius: $topright;
+    -webkit-border-bottom-left-radius: $bottomleft;
+    -webkit-border-bottom-right-radius: $bottomright;
+    -moz-border-radius-topleft: $topleft_or_all;
+    -moz-border-radius-topright: $topright;
+    -moz-border-radius-bottomleft: $bottomleft;
+    -moz-border-radius-bottomright: $bottomright;
+    border-top-left-radius: $topleft_or_all;
+    border-top-right-radius: $topright;
+    border-bottom-left-radius: $bottomleft;
+    border-bottom-right-radius: $bottomright;
+}
+
+@mixin box-shadow($horizontal, $vertical, $blur_or_color, $spread_or_color: null, $color: null)
+{
+    @if ($spread_or_color == null) {
+        $color: $blur_or_color;
+        $blur_or_color: null;
+    } @else if ($color == null) {
+        $color: $spread_or_color;
+        $spread_or_color: null;
+    }
+
+    -moz-box-shadow:     $horizontal $vertical $blur_or_color $spread_or_color $color;
+    -webkit-box-shadow:  $horizontal $vertical $blur_or_color $spread_or_color $color;
+    box-shadow:           $horizontal $vertical $blur_or_color $spread_or_color $color;
+}
+
+section.warning
+{
+    background: #DA3610;
+    color: #fff;
+    font-family: "brandon-grotesque", sans-serif;
+    text-align: center;
+    padding: 0.5em;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.9em;
+
+    a {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    &:before, &:after {
+        content: "\2691";
+        margin: 0 0.3em;
+    }
+
+    &:before {
+        display: inline-block;
+        backface-visibility: hidden;
+
+        -webkit-transform: scale(-1, 1);
+        -moz-transform: scale(-1, 1);
+        transform: scale(-1, 1);
+    }
+}
+
+section.content {
+    width: 50em;
+    margin: 0 auto;
+    background-color: #fff;
+    font-family: "freight-sans-pro", sans-serif;
+    padding-bottom: 2em;
+    position: relative;
+
+    &:before {
+        content: "";
+        width: 100%;
+        height: 1px;
+        position: absolute;
+        top: -3px;
+        display: block;
+        background-color: transparent;
+        @include box-shadow(0, 3px, 3px, 1px, rgba(0, 0, 0, 0.2));
+    }
+
+    header {
+        background-color: #DA3610;
+        color: #fff;
+
+        padding: 2em 2em 2em 2em;
+
+        @include rounded(0, 0, 3px, 3px);
+
+        h1 {
+            font-size: 3.5em;
+            line-height: 1em;
+            font-weight: normal;
+            margin: 0;
+        }
+    }
+
+    h2:first-child {
+        margin-top: 0;
+        padding-top: 1em;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        margin-bottom: 0;
+    }
+
+    p {
+        margin-top: 0;
+    }
+
+    & > * {
+        padding: 0 2em;
+    }
+}
+
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+input[type="text"], input[type="password"] {
+    outline: none;
+    border: 1px solid #D7D7D7;
+    @include rounded(3px);
+    padding: 0.5em;
+    display: block;
+    width: 100%;
+
+    font-family: "freight-sans-pro", sans-serif;
+    font-size: 1em;
+
+    &:focus {
+        outline: none;
+        border: 1px solid #DA3610;
+    }
+}
+
+input[type="submit"] {
+    background-color: #DA3610;
+    border: 0;
+
+    @include rounded(3px);
+    padding: 1em;
+
+    margin-top: 1em;
+
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: "brandon-grotesque", sans-serif;
+    font-size: 1.2em;
+}

@@ -1,0 +1,21 @@
+form.login
+{
+    width: 15em;
+    margin: 0 auto;
+    padding: 1em;
+
+    p:first-child::before {
+        content: "";
+        display: block;
+        width: 6em;
+        height: 6em;
+        margin: 0 auto;
+        background-color: red;
+        margin-bottom: 1em;
+    }
+
+    input {
+        width: 100%;
+        margin: 0;
+    }
+}

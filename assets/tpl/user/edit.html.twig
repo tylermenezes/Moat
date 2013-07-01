@@ -1,0 +1,39 @@
+{% extends "template.html.twig" %}
+{% block content %}
+    <section class="user edit content">
+        <header>
+            <h1>
+                {% if me.username == user.username %}
+                    Check yourself.
+                {% else %}
+                    Editing {{ user.name }} ({{ user.username }})
+                {% endif %}
+            </h1>
+        </header>
+
+        {% if me.username == user.username %}
+            <a href="/user/link">Link Social Media</a>
+        {% endif %}
+
+        <form method="post">
+            {% if me.is_admin %}
+                <h2>Login</h2>
+                <input type="text" name="username" value="{{ user.username }}" placeholder="Username" />
+            {% endif %}
+
+            <h2>Name</h2>
+            <fieldset class="name">
+                <input type="text" name="first_name" value="{{ user.first_name }}" placeholder="First Name" />
+                <input type="text" name="last_name" value="{{ user.last_name }}" placeholder="Last Name" />
+            </fieldset>
+
+            <h2>Contact</h2>
+            <fieldset class="contact">
+                <input type="text" name="phone" value="{{ user.phone }}" placeholder="(555) 555-5555" />
+                <input type="text" name="email" value="{{ user.email }}" placeholder="me@me.com" />
+            </fieldset>
+
+            <input type="submit" value="Update" />
+        </form>
+    </section>
+{% endblock %}

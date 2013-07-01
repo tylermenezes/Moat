@@ -1,0 +1,3 @@
+[submodule "includes/submodules/Jetpack"]
+	path = includes/submodules/Jetpack
+	url = /home/tylermenezes/Github/tylermenezes/Jetpack

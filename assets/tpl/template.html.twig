@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+    <title>Moat</title>
+    <meta name="description" content="Chairs are for people. And that is why chairs are like Moat." />
+
+    <meta property="og:title" content="Moat" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Chairs are for people. And that is why chairs are like Moat." />
+
+    <link rel="stylesheet" href="/assets/css/style.css" />
+</head>
+<body>
+    <header>
+        <h1><a href="/">Moat</a></h1>
+        {% if me %}
+            <nav>
+                <ul>
+                    <li class="active"><a href="/directory">Directory</a></li>
+                    <li><a href="/friends">Friends</a></li>
+                    <li><a href="/hours">Office Hours</a></li>
+                    <li><a href="/deals">Deals</a></li>
+                </ul>
+                <ul class="controls">
+                    {% if current_cohort and cohorts %}
+                        <li class="selector">
+                            <a href="/directory/cohort/{{ current_cohort.slug }}">{{ current_cohort.name }}</a>
+                            <ul>
+                                {% for cohort in cohorts %}
+                                    <li><a href="/directory/cohort/{{ cohort.slug }}">{{ cohort.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endif %}
+                    <li class="selector">
+                        <a href="#">{{ me.name }}</a>
+                        <ul>
+                            <li><a href="/user/{{ me.username }}">Me</a></li>
+                            <li><a href="/login/logout">Logout</a></li>
+                            {% for company in me.companies %}
+                                <li><a href="/company/{{ company.id }}">{{ company.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        {% endif %}
+    </header>
+    {{ block('content') }}
+    {{  block('scripts') }}
+    <script type="text/javascript" src="//use.typekit.net/pjh7jyk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+</body>
+</html>

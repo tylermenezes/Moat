@@ -1,0 +1,30 @@
+{% extends 'template.html.twig' %}
+{% block content %}
+    <ul class="directory">
+        {% for company in current_cohort.companies %}
+            <li class="team">
+                <ul>
+                    <li class="info">
+                        <span class="name">{{ company.name }}</span>
+                        <span class="description">{{ company.description }}</span>
+                    </li>
+                    {% for member in company.members %}
+                        <li class="member">
+                            <a href="/user/{{ member.username }}">
+                                <img src="{{ member.photo }}" />
+                            </a>
+                            <div class="details">
+                                <span class="name">
+                                    <span class="first">{{ member.first_name }}</span>
+                                    <span class="last">{{ member.last_name }}</span>
+                                </span>
+                                <span class="phone">{{ member.formatted_phone }}</span>
+                                <span class="email"><a href="mailto:{{ member.email }}">{{ member.email }}</a></span>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

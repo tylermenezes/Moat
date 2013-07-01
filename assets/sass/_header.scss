@@ -1,0 +1,168 @@
+body > header {
+    $font_size: 12px;
+    $padding: 20px;
+    $normal_bg_color: #EFEFEF;
+    $hover_bg_color: #E5E5E5;
+    $normal_fg_color: #585858;
+    $hover_fg_color: #585858;
+    $border_color: #D7D7D7;
+    $font_stack: "brandon-grotesque", sans-serif;
+
+    background-color: $normal_bg_color;
+
+    border-bottom: 2px solid #DA3610;
+
+    h1 {
+        float: left;
+        margin: 0;
+
+        a {
+            font-size: $font_size;
+            text-transform: uppercase;
+            color: #DA3610;
+            font-family: $font_stack;
+            font-weight: bold;
+            text-decoration: none;
+            display: block;
+            padding: $padding $padding*2 $padding 23px;
+            letter-spacing: 0.1em;
+
+            z-index: -1;
+
+            text-shadow: -1px 1px $border_color,
+                           -2px 2px $border_color,
+                           -3px 3px $border_color,
+                           -4px 4px $border_color,
+                           -5px 5px $border_color,
+                           -6px 6px $border_color,
+                           -7px 7px $border_color,
+                           -8px 8px $border_color,
+                           -9px 9px $border_color,
+                           -10px 10px $border_color,
+                           -11px 11px $border_color,
+                           -12px 12px $border_color,
+                           -13px 13px $border_color,
+                           -14px 14px $border_color,
+                           -15px 15px $border_color,
+                           -16px 16px $border_color,
+                           -17px 17px $border_color,
+                           -18px 18px 1px $border_color,
+                           -19px 19px 2px $border_color,
+                           -20px 20px 3px $border_color,
+                           -21px 21px 4px $border_color,
+                           -22px 22px 5px $border_color,
+                           -23px 23px 6px $border_color,
+                           -24px 24px 7px $border_color;
+        }
+    }
+    nav {
+        width: auto;
+        display: block;
+
+        & > ul {
+            margin: 0;
+            padding: 0;
+            float: left;
+
+            & > li {
+                float: left;
+                height: 100%;
+                display: block;
+                list-style-type: none;
+
+
+                border-right: 1px solid $border_color;
+
+                &:first-child {
+                    border-left: 1px solid $border_color;
+                }
+
+                &.active a {
+                    color: $hover_fg_color;
+                    background-color: $hover_bg_color;
+                }
+
+                a {
+                    color: $normal_fg_color;
+                    display: block;
+                    font-size: $font_size;
+                    padding: $padding;
+                    text-transform: uppercase;
+                    text-decoration: none;
+                    font-family: $font_stack;
+                    font-weight: bold;
+                    letter-spacing: 0.1em;
+
+                    &:hover {
+                        color: $hover_fg_color;
+                        background-color: $hover_bg_color;
+                    }
+                }
+            }
+        }
+
+        ul.controls {
+            float: right;
+
+            & > li {
+                position: relative;
+
+                & > a {
+                    &:after {
+                        content: "\25BE";
+                        font-size: 0.5em;
+                        margin-left: 0.5em;
+                        position: relative;
+                        top: -0.25em;
+                        color: #B7B7B7;
+                    }
+                }
+
+                // Dropdown menu
+                ul {
+                    opacity: 0;
+                    visibility: hidden;
+                    position: absolute;
+                    right: -1px;
+                    padding: 0;
+
+                    border: 1px solid $border_color;
+                    border-top: 2px solid $normal_bg_color;
+
+                    li {
+                        a {
+                            font-size: $font_size;
+                            padding: $padding;
+                            background-color: #fff;
+                            font-family: $font_stack;
+
+                            &:hover {
+                                background-color: $normal_bg_color;
+                            }
+                        }
+
+                        margin: 0;
+                        list-style-type: none;
+                    }
+
+                    -webkit-transition: opacity 0.2s ease-in-out;
+                }
+
+                // Show menu when either the button, or the menu is being hovered
+                &:hover ul, ul:hover{
+                    -webkit-transition: opacity 0.2s ease-in-out;
+                    visibility: visible;
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    &:after {
+        content: "";
+        display: block;
+        width: 0;
+        height: 0;
+        clear: both;
+    }
+}

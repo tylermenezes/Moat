@@ -1,0 +1,60 @@
+{% extends "template.html.twig" %}
+{% block content %}
+    {% if username_taken %}
+        <section class="warning">
+            Bummer. That username was already taken.
+        </section>
+    {% elseif missing_fields %}
+        <section class="warning">
+            All fields are required.
+        </section>
+    {% elseif password_mismatch %}
+        <section class="warning">
+            Oops! Your passwords didn't match.
+        </section>
+    {% elseif invalid_phone %}
+        <section class="warning">
+            Something looks weird with your phone number...
+        </section>
+    {% elseif invalid_email %}
+        <section class="warning">
+            Something looks weird with your email...
+        </section>
+    {% else  %}
+        {% set no_error = true %}
+    {% endif %}
+
+    <section class="content register">
+        {% if no_error %}
+            <header>
+                <h1>We're excited to see you're here. Let's get started.</h1>
+            </header>
+        {% endif %}
+
+        <form method="post">
+            <h2>Login</h2>
+            <p>How can we authenticate you?</p>
+            <fieldset class="login">
+                <input type="text" name="username" value="{{ username }}" placeholder="Username" />
+                <input type="password" name="password" value="" placeholder="Password" />
+                <input type="password" name="password_confirm" value="" placeholder="Password, once more" />
+            </fieldset>
+
+            <h2>Your Name</h2>
+            <p>We have such a bad memory for names; what was yours, again?</p>
+            <fieldset class="name">
+                <input type="text" name="first_name" value="{{ first_name }}" placeholder="First Name" />
+                <input type="text" name="last_name" value="{{ last_name }}" placeholder="Last Name" />
+            </fieldset>
+
+            <h2>Contact</h2>
+            <p>This information will only be available internally, never publicly.</p>
+            <fieldset class="contact">
+                <input type="text" name="phone" value="{{ phone }}" placeholder="(555) 555-5555" />
+                <input type="text" name="email" value="{{ email }}" placeholder="me@me.com" />
+            </fieldset>
+
+            <input type="submit" value="Engage!" />
+        </form>
+    </section>
+{% endblock %}

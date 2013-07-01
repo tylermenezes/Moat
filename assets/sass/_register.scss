@@ -1,0 +1,70 @@
+section.register {
+    form {
+        text-align: center;
+        width: 40em;
+        margin: 0 auto;
+        fieldset {
+            input {
+                width: 38em;
+                padding: 1em;
+            }
+
+            input[type="password"] {
+                letter-spacing: 0.8em;
+
+                &::-webkit-input-placeholder {
+                    letter-spacing: normal;
+                }
+
+                &::-moz-placeholder {
+                    letter-spacing: normal;
+                }
+
+                &:-moz-placeholder {
+                    letter-spacing: normal;
+                }
+
+                &:-ms-input-placeholder {
+                    letter-spacing: normal;
+                }
+            }
+
+            input {
+                margin-top: 0;
+                margin-bottom: 0;
+                border-top-width: 0;
+                @include rounded(0);
+            }
+
+            input:first-child {
+                border-top-width: 1px;
+                margin-bottom: 0;
+                @include rounded(3px, 3px, 0, 0);
+            }
+
+            input:last-child {
+                @include rounded(0, 0, 3px, 3px);
+            }
+
+            &.login {
+                input[name="password"] {
+                    float: left;
+                    margin-right: 0;
+                    border-right-width: 0.1em;
+                    width: 17.95em;
+
+                    @include rounded(0, 0, 0, 3px);
+                }
+
+                input[name="password_confirm"] {
+                    float: left;
+                    margin-left: 0;
+                    width: 17.95em;
+
+                    border-left: 0;
+                    @include rounded(0, 0, 3px, 0);
+                }
+            }
+        }
+    }
+}
