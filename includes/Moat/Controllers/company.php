@@ -71,6 +71,11 @@ class company {
         $company->name = $this->request->post('name');
         $company->description = $this->request->post('description');
 
+        if (Models\User::me()->is_admin) {
+            $company->is_admin = $this->request->post('is_admin') ? true : false;
+            $company->is_adviser = $this->request->post('is_adviser') ? true : false;
+        }
+
         $company->update();
         $this->redirect('/company/'.$company->id);
     }
