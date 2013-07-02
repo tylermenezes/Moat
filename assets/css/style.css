@@ -316,6 +316,7 @@ body > header {
           padding: 0;
           border: 1px solid #d7d7d7;
           border-top: 2px solid #efefef;
+          z-index: 999999;
           -webkit-transition: opacity 0.2s ease-in-out; }
           body > header nav ul.controls > li ul li {
             margin: 0;
