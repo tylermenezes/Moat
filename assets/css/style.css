@@ -904,7 +904,8 @@ section.hours ul.blocks > li {
   section.hours ul.blocks > li > .admin {
     float: right; }
   section.hours ul.blocks > li ul.slots {
-    padding: 0; }
+    padding: 0;
+    clear: both; }
     section.hours ul.blocks > li ul.slots li {
       list-style-type: none;
       padding: 0.2em 0; }

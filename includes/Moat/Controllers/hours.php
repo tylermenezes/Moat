@@ -83,7 +83,7 @@ class hours {
             throw new \CuteControllers\HttpError(403);
         }
 
-        $this->require_post('starts_at', 'length', 'description');
+        $this->require_post('starts_at', 'length', 'number');
         $starts_at = strtotime($this->request->post('starts_at'));
         $length = $this->request->post('length');
         $number = $this->request->post('number');
