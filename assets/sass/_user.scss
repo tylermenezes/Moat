@@ -1,0 +1,36 @@
+.user {
+    ul.social-connect {
+        li {
+            list-style-type: none;
+            display: block;
+            text-align: center;
+
+            &.linked a, &.unlinked a {
+                border: 0;
+                background-color: #585858;
+                @include rounded(3px);
+                padding: 1em;
+                margin-top: 1em;
+                color: #fff;
+                text-transform: uppercase;
+                font-weight: bold;
+                font-family: "brandon-grotesque", sans-serif;
+                font-size: 1.2em;
+                text-decoration: none;
+                display: inline-block;
+            }
+
+            &.facebook.unlinked a {
+                background-color: #3B5998;
+            }
+
+            &.linkedin.unlinked a {
+                background-color: #1381BB;
+            }
+
+            &.twitter.unlinked a {
+                background-color: #00ACEE;
+            }
+        }
+    }
+}

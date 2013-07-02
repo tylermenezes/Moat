@@ -10,7 +10,7 @@ use \Moat\Traits;
  * @copyright   Copyright (c) Tyler Menezes. Released under the BSD license.
  *
  */
-class user {
+class index {
     use \CuteControllers\Controller;
     use Traits\NeedsLogin;
 
@@ -62,6 +62,14 @@ class user {
         if (!filter_var($this->request->post('email'), FILTER_VALIDATE_EMAIL)) {
             echo \Moat::$twig->render('user/edit.html.twig', ['user' => $user, 'invalid_email' => true]);
             exit;
+        }
+
+        if (isset($_FILES["photo"])) {
+            $image = new \Image($_FILES["photo"]["tmp_name"]);
+            $image->fill(200, 200);
+            $filename = md5(time() . rand(0,50000)) . '.jpg';
+            $image->save(pathify(\Moat::$dir->webroot, 'assets', 'uploads', $filename));
+            $user->photo = '/assets/uploads/'.$filename;
         }
 
         $user->first_name = $this->request->post('first_name');

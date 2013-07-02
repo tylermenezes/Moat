@@ -24,10 +24,35 @@ class User extends \TinyDb\Orm
     public $last_name;
     public $email;
     public $phone;
-    protected $photo;
+    public $photo;
 
     public $created_at;
     public $modified_at;
+
+    public function friends_with($network, $user)
+    {
+        if ($this->get_oauth($network) === null || $user->get_oauth($network) === null) {
+            return true;
+        }
+
+        $providers = [
+            'facebook' => '\\Moat\\FriendshipProviders\\Facebook',
+            'twitter' => '\\Moat\\FriendshipProviders\\Twitter',
+            'linkedin' => '\\Moat\\FriendshipProviders\\LinkedIn'
+        ];
+        $provider = $providers[$network];
+        return $provider::is_friends($user->get_oauth($network)->service_user_id, $this->get_oauth($network)->access_token);
+    }
+
+    public function facebook_friends_with($user)
+    {
+        return $this->friends_with('facebook', $user);
+    }
+
+    public function linkedin_friends_with($user)
+    {
+        return $this->friends_with('linkedin', $user);
+    }
 
     public function get_companies()
     {
@@ -40,7 +65,11 @@ class User extends \TinyDb\Orm
         if ($service === null) {
             return OAuth::find()->where('userID = ?', $this->id)->all();
         } else {
-            return OAuth::find()->where('userID = ?', $this->id)->where('service = ?', $service)->one();
+            try {
+                return OAuth::find()->where('userID = ?', $this->id)->where('service = ?', $service)->one();
+            } catch (\TinyDb\NoRecordException $ex) {
+                return null;
+            }
         }
     }
 
@@ -49,18 +78,13 @@ class User extends \TinyDb\Orm
         return '+1 ('.substr($this->phone, 0, 3).') '.substr($this->phone, 3, 3).'-'.substr($this->phone, 6,4);
     }
 
-    public function get_photo()
+    public function get_photo_websafe()
     {
         if ($this->photo === null) {
             return 'https://my.studentrnd.org/assets/img/cubes.gif';
         } else {
             return $this->photo;
         }
-    }
-
-    public function set_photo($photo)
-    {
-        $this->photo = $photo;
     }
 
     public function get_has_photo()

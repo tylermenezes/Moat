@@ -1,0 +1,30 @@
+{% extends "template.html.twig" %}
+{% block content %}
+    <section class="user link content">
+        <header>
+            <h1>Be social.</h1>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="/user/{{ me.username }}">Profile Information</a></li>
+                <li class="active"><a href="/user/link">Social Media</a></li>
+            </ul>
+        </nav>
+
+        <p>Connect with your social networks so we can help you friend others in your cohort!</p>
+
+        <ul class="social-connect">
+            {% for network in ['Facebook', 'LinkedIn'] %}
+                {% set oauth = me.get_oauth(network|lower) %}
+                <li class="{{ network|lower }} {% if oauth %}linked{% else %}unlinked{% endif %}">
+                    {% if oauth %}
+                        <a href="/user/oauth/unlink/{{ network|lower }}">{{ network }}</a>
+                    {% else %}
+                        <a href="/user/oauth/start/{{ network|lower }}">{{ network }}</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endblock %}

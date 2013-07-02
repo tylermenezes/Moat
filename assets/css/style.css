@@ -187,7 +187,7 @@ section.content div.field {
     width: 30em; }
   section.content div.field textarea {
     height: 5em; }
-  section.content div.field .help {
+  section.content div.field .help, section.content div.field img {
     margin-left: 13.5em;
     display: block;
     clear: both;
@@ -657,3 +657,38 @@ section.friends table td.name {
     width: 1em;
     height: 1em;
     margin-right: 0.5em; }
+
+.user ul.social-connect li {
+  list-style-type: none;
+  display: block;
+  text-align: center; }
+  .user ul.social-connect li.linked a, .user ul.social-connect li.unlinked a {
+    border: 0;
+    background-color: #585858;
+    -webkit-border-top-left-radius: 3px;
+    -webkit-border-top-right-radius: 3px;
+    -webkit-border-bottom-left-radius: 3px;
+    -webkit-border-bottom-right-radius: 3px;
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-topright: 3px;
+    -moz-border-radius-bottomleft: 3px;
+    -moz-border-radius-bottomright: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    padding: 1em;
+    margin-top: 1em;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: "brandon-grotesque", sans-serif;
+    font-size: 1.2em;
+    text-decoration: none;
+    display: inline-block; }
+  .user ul.social-connect li.facebook.unlinked a {
+    background-color: #3B5998; }
+  .user ul.social-connect li.linkedin.unlinked a {
+    background-color: #1381BB; }
+  .user ul.social-connect li.twitter.unlinked a {
+    background-color: #00ACEE; }

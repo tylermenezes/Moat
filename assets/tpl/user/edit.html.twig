@@ -28,29 +28,47 @@
         {% if me.username == user.username %}
             <nav>
                 <ul>
-                    <li class="active"><a href="/user/{{ user.username }}">Profile Information</a></li>
+                    <li class="active"><a href="/user/{{ me.username }}">Profile Information</a></li>
                     <li><a href="/user/link">Social Media</a></li>
                 </ul>
             </nav>
         {% endif %}
 
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
+            <h2>Basic Info</h2>
             {% if me.is_admin %}
-                <h2>Login</h2>
-                <input type="text" name="username" value="{{ user.username }}" placeholder="Username" required />
+                <div class="field">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" value="{{ user.username }}" placeholder="Username" required />
+                    <span class="help">This field can only be changed by administrators.</span>
+                </div>
             {% endif %}
-
-            <h2>Name</h2>
-            <fieldset class="name">
+            <div class="field">
+                <label for="photo">Profile Photo</label>
+                <input type="file" name="photo" accept="image/*" />
+                <img src="{{ user.photo_websafe }}" />
+                <span class="help">This will replace your uploaded photo.</span>
+            </div>
+            <div class="field">
+                <label for="first_name">First Name</label>
                 <input type="text" name="first_name" value="{{ user.first_name }}" placeholder="First Name" required />
+            </div>
+            <div class="field">
+                <label for="last_name">Last Name</label>
                 <input type="text" name="last_name" value="{{ user.last_name }}" placeholder="Last Name" required />
-            </fieldset>
+            </div>
 
-            <h2>Contact</h2>
-            <fieldset class="contact">
+            <h2>Contact Information</h2>
+            <div class="field">
+                <label for="Phone">Phone Number</label>
                 <input type="text" name="phone" value="{{ user.phone }}" placeholder="(555) 555-5555" required />
+                <span class="help">We'll use this number if we need to contact you, and it will be displayed on the directory.</span>
+            </div>
+            <div class="field">
+                <label for="email">Email Address</label>
                 <input type="email" name="email" value="{{ user.email }}" placeholder="me@me.com" required />
-            </fieldset>
+                <span class="help">Notifications will be sent here, and it will be displayed on the directory.</span>
+            </div>
 
             <input type="submit" value="Update" />
         </form>

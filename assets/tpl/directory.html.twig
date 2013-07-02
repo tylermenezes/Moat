@@ -18,7 +18,7 @@
                     {% for member in company.members %}
                         <li class="member">
                             <a href="/user/{{ member.username }}">
-                                <img src="{{ member.photo }}" />
+                                <img src="{{ member.photo_websafe }}" />
                             </a>
                             <div class="details">
                                 <span class="name">

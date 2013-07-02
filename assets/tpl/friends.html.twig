@@ -12,17 +12,19 @@
                 <tr>
                     <td class="name">Name</td>
                     <td class="facebook">Facebook</td>
-                    <td class="twitter">Twitter</td>
-                    <td class="linkedin">LinkedIn</td>
                 </tr>
             </thead>
             <tbody>
                 {% for member in current_cohort.members %}
                     <tr>
-                        <td class="name"><img src="{{ member.photo }}" />{{ member.name }}</td>
-                        <td class="facebook"></td>
-                        <td class="twitter"></td>
-                        <td class="linkedin"></td>
+                        <td class="name"><img src="{{ member.photo_websafe }}" />{{ member.name }}</td>
+                        <td class="facebook">
+                            {% if member.facebook and member.id != me.id and not me.facebook_friends_with(member) %}
+                                <a href="https://www.facebook.com/addfriend.php?id={{ member.facebook.service_user_id }}">
+                                    Add Friend
+                                </a>
+                            {% endif %}
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

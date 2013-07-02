@@ -1,0 +1,11 @@
+{% extends "template.html.twig" %}
+{% block content %}
+    <section class="company content">
+        <header>
+            <h1>{{ company.name }}</h1>
+        </header>
+        <img src="{{ user.picture }}" />
+        <p>Email: <a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+        <p>Phone: {{ user.phone }}</p>
+    </section>
+{% endblock %}
