@@ -2,7 +2,7 @@
 {% block content %}
     {% if code %}
         <section class="warning">
-            Created code: {{ code }}
+            Created code: <a href="/register?code={{ code }}">{{ code }}</a>
         </section>
     {% endif %}
 
