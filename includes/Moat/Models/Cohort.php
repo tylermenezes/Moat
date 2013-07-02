@@ -30,6 +30,7 @@ class Cohort extends \TinyDb\Orm {
     {
         return User::find()->join('users_companies ON (users_companies.userID = users.userID)')
                            ->join('companies ON (users_companies.companyID = companies.companyID)')
+                           ->group_by('userID')
                            ->where('companies.cohortID = ?', $this->cohortID)->all();
     }
 
