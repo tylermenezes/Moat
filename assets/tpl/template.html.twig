@@ -42,9 +42,9 @@
                         </li>
                     {% endif %}
                     <li class="selector">
-                        <a href="#">{{ me.name }}</a>
+                        <a href="/user/edit/{{ me.username }}">{{ me.name }}</a>
                         <ul>
-                            <li><a href="/user/{{ me.username }}">Me</a></li>
+                            <li><a href="/user/edit/{{ me.username }}">Me</a></li>
                             <li><a href="/login/logout">Logout</a></li>
                             {% for company in me.companies %}
                                 <li><a href="/company/{{ company.id }}">{{ company.name }}</a></li>
