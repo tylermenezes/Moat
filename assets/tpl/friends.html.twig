@@ -19,10 +19,14 @@
                     <tr>
                         <td class="name"><img src="{{ member.photo_websafe }}" />{{ member.name }}</td>
                         <td class="facebook">
-                            {% if member.facebook and member.id != me.id and not me.facebook_friends_with(member) %}
-                                <a class="facebook" target="_blank" href="https://www.facebook.com/addfriend.php?id={{ member.facebook.service_user_id }}">
+                            {% if member.facebook and member.id != me.id %}
+                                {% if me.facebook_friends_with(member) %}
+                                    &#10003;
+                                {% else %}
+                                    <a class="facebook" target="_blank" href="https://www.facebook.com/addfriend.php?id={{ member.facebook.service_user_id }}">
                                     Add Friend
-                                </a>
+                                    </a>
+                                {% endif %}
                             {% endif %}
                         </td>
                     </tr>
