@@ -3,13 +3,17 @@
 {% block content %}
     {% if not me.has_photo %}
         <section class="warning">
-            <a href="/user/{{ me.username }}">Please upload a photo.</a>
+            <a href="/user/edit/{{ me.username }}">Please upload a photo.</a>
+        </section>
+    {% elseif not (me.facebook or me.twitter or me.linkedin) %}
+        <section class="warning">
+            <a href="/user/link">Please connect your social networks.</a>
         </section>
     {% endif %}
 
     <ul class="directory">
         {% for company in current_cohort.companies %}
-            <li class="team">
+            <li class="team {% if company.is_admin %}admin{% endif %} {% if company.is_adviser %}adviser{% endif %}">
                 <ul>
                     <li class="info">
                         <span class="name"><a href="/company/{{ company.id }}">{{ company.name }}</a></span>

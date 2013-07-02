@@ -23,7 +23,7 @@ class Cohort extends \TinyDb\Orm {
 
     public function get_companies()
     {
-        return Company::find()->where('cohortID = ?', $this->id)->all();
+        return Company::find()->where('cohortID = ?', $this->id)->order_by('is_admin ASC, is_adviser ASC, name')->all();
     }
 
     public function get_members()

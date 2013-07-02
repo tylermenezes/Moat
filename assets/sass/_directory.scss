@@ -1,6 +1,5 @@
 ul.directory {
     padding: 0;
-    max-width: 7 * 13.5em;
     margin: 2em 0 2em 2em;
     float: left;
 
@@ -13,6 +12,14 @@ ul.directory {
 
         margin-right: 1em;
         margin-bottom: 2.5em;
+
+        &.admin, &.adviser {
+            border-top-color: #10B4DA;
+
+            ul li.info {
+                background-color: #10B4DA;
+            }
+        }
 
         ul {
             padding: 0;
@@ -40,6 +47,8 @@ ul.directory {
                 overflow: hidden;
 
                 @include rounded(3px);
+
+
 
 
                 &.info {
