@@ -34,7 +34,8 @@ class db {
                     'type' => 'varchar(255)'
                 ],
                 'bio' => [
-                    'type' => 'text'
+                    'type' => 'text',
+                    'null' => true
                 ],
                 'email' => [
                     'type' => 'varchar(255)'

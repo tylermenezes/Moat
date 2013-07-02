@@ -31,10 +31,10 @@ class invite {
         ]);
 
         if ($this->request->post('email')) {
-            mail($this->request->post('email'), 'Invite to Moat', \Moat::$twig->render('emails/invite.html.twig', [
+            mail($this->request->post('email'), 'Invite to Moat', \Moat::$twig->render('emails/invite.txt.twig', [
                     'link' => \CuteControllers\Router::link('/register?code='.$code)
                 ]),
-                'From: moat@studentrnd.org');
+                'From: "Moat" <moat@studentrnd.org>');
             $this->redirect('/user/invite');
         } else {
             echo \Moat::$twig->render('user/invite.html.twig', ['code' => $code]);
