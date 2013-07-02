@@ -1,5 +1,6 @@
 <?php
 use \Moat\Models;
+use \Moat\Models\OfficeHours;
 use \Moat\Traits;
 
 /**
@@ -12,34 +13,126 @@ use \Moat\Traits;
 class hours {
     use \CuteControllers\Controller;
     use Traits\NeedsLogin;
+    use Traits\NeedsCohort;
 
     public function action_index()
     {
-        echo \Moat::$twig->render('hours/view.html.twig');
+        $upcoming_hours = OfficeHours\Block::find()->where('NOW() < DATE_ADD(starts_at, INTERVAL 1 DAY)')->order_by('starts_at ASC')->all();
+        echo \Moat::$twig->render('hours/view.html.twig', ['upcoming_blocks' => $upcoming_hours]);
     }
 
-    public function post_book()
+    public function get_book($slotID)
     {
-        // TODO
+        try {
+            $slot = OfficeHours\Slot::one($slotID);
+        } catch (\TinyDb\NoRecordException $ex) {
+            throw new \CuteControllers\HttpError(404);
+        }
+
+        $slot->userID = Models\User::me()->id;
+        $slot->update();
+        $this->redirect('/hours');
     }
 
-    public function post_release()
+    public function get_release($slotID)
     {
-        // TODO
+        try {
+            $slot = OfficeHours\Slot::one($slotID);
+        } catch (\TinyDb\NoRecordException $ex) {
+            throw new \CuteControllers\HttpError(404);
+        }
+
+        if ($slot->user->id !== Models\User::me()->id) {
+            throw new \CuteControllers\HttpError(403);
+        }
+
+        $slot->userID = null;
+        $slot->update();
+        $this->redirect('/hours');
+    }
+
+    public function get_noshow($slotID)
+    {
+        try {
+            $slot = OfficeHours\Slot::one($slotID);
+        } catch (\TinyDb\NoRecordException $ex) {
+            throw new \CuteControllers\HttpError(404);
+        }
+
+        if (!Models\User::me()->is_admin && !$slot->block->user->id !== Models\User::me()->id) {
+            throw new \CuteControllers\HttpError(403);
+        }
+
+        $slot->noshow = true;
+        $slot->update();
+        $this->redirect('/hours');
     }
 
     public function get_create()
     {
+        if (!Models\User::me()->is_adviser) {
+            throw new \CuteControllers\HttpError(403);
+        }
+
         echo \Moat::$twig->render('hours/create.html.twig');
     }
 
     public function post_create()
     {
-        // TODO
+        if (!Models\User::me()->is_adviser) {
+            throw new \CuteControllers\HttpError(403);
+        }
+
+        $this->require_post('starts_at', 'length', 'description');
+        $starts_at = strtotime($this->request->post('starts_at'));
+        $length = $this->request->post('length');
+        $number = $this->request->post('number');
+        $description = $this->request->post('description');
+
+        $block = new OfficeHours\Block([
+            'userID' => Models\User::me()->id,
+            'starts_at' => $starts_at,
+            'description' => $description
+        ]);
+
+        $time = $starts_at;
+        for ($i = 0; $i < $number; $i++) {
+            $slot = new OfficeHours\Slot([
+                'blockID' => $block->id,
+                'starts_at' => $time
+            ]);
+            $time += $length * 60;
+        }
+
+        $this->redirect('/hours');
     }
 
-    public function post_cancel()
+    public function get_cancel($type, $id)
     {
-        // TODO
+
+        try {
+            if ($type === 'slot') {
+                $obj = OfficeHours\Slot::one($id);
+                if (!Models\User::me()->is_admin && !$obj->block->user->id !== Models\User::me()->id) {
+                    throw new \CuteControllers\HttpError(403);
+                }
+
+                // TODO: send emails
+            } else if ($type === 'block') {
+                $obj = OfficeHours\Block::one($id);
+                if (!Models\User::me()->is_admin && !$obj->user->id !== Models\User::me()->id) {
+                    throw new \CuteControllers\HttpError(403);
+                }
+
+                // TODO: send emails
+            } else {
+                throw new \CuteControllers\HttpError(404);
+            }
+        } catch (\TinyDb\NoRecordException $ex) {
+            throw new \CuteControllers\HttpError(404);
+        }
+
+        $obj->delete();
+        $this->redirect('/hours');
     }
 }

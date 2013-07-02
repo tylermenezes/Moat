@@ -5,12 +5,23 @@
             <h1>Be social.</h1>
         </header>
 
-        <nav>
-            <ul>
-                <li><a href="/user/{{ me.username }}">Profile Information</a></li>
-                <li class="active"><a href="/user/link">Social Media</a></li>
-            </ul>
-        </nav>
+        {% if me.username == user.username or me.is_admin %}
+            <nav>
+                <ul>
+                    <li><a href="/user/{{ user.username }}">View</a></li>
+                    <li><a href="/user/edit/{{ user.username }}">Edit</a></li>
+                    {% if me.username == user.username %}
+                        <li class="active"><a href="/user/link">Social Media</a></li>
+                    {% endif %}
+                    {% if me.is_admin and user.username != me.username %}
+                        <li><a href="/user/impersonate/{{ user.username }}">Impersonate</a></li>
+                    {% endif %}
+                    {% if me.is_admin %}
+                        <li><a href="/user/companies/{{ user.username }}">Companies</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endif %}
 
         <p>Connect with your social networks so we can help you friend others in your cohort!</p>
 

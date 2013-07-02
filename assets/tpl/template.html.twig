@@ -17,17 +17,26 @@
             <nav>
                 <ul>
                     <li {% if block('active') == 'directory' %}class="active"{% endif %}><a href="/directory">Directory</a></li>
-                    <li {% if block('active') == 'friends' %}class="active"{% endif %}><a href="/friends">Friends</a></li>
+                    <li {% if block('active') == 'friends' %}class="active"{% endif %}><a href="/friends">Follow &amp; Friend</a></li>
                     <li {% if block('active') == 'hours' %}class="active"{% endif %}><a href="/hours">Office Hours</a></li>
                     <li {% if block('active') == 'deals' %}class="active"{% endif %}><a href="/deals">Deals</a></li>
                 </ul>
                 <ul class="controls">
+                    {% if me.is_admin %}
+                        <li class="selector">
+                            <a href="#">Admin</a>
+                            <ul>
+                                <li><a href="/company/new">New Company</a></li>
+                                <li><a href="/user/invite">Invite</a></li>
+                            </ul>
+                        </li>
+                    {% endif %}
                     {% if current_cohort and cohorts %}
                         <li class="selector">
                             <a href="/directory/cohort/{{ current_cohort.slug }}">{{ current_cohort.name }}</a>
                             <ul>
                                 {% for cohort in cohorts %}
-                                    <li><a href="/directory/cohort/{{ cohort.slug }}">{{ cohort.name }}</a></li>
+                                    <li><a href="/cohort/{{ cohort.slug }}">{{ cohort.name }}</a></li>
                                 {% endfor %}
                             </ul>
                         </li>

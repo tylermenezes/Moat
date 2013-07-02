@@ -1,4 +1,48 @@
 {% extends "template.html.twig" %}
 {% block content %}
-    foo
+    <section class="content company edit">
+        <header>
+            <h1>Editing {{ company.name }}</h1>
+        </header>
+
+        {% if me.in_company(company) or me.is_admin %}
+            <nav>
+                <ul>
+                    <li><a href="/company/{{ company.id}}">View</a></li>
+                    <li class="active"><a href="/company/edit/{{ company.id}}">Edit</a></li>
+                </ul>
+            </nav>
+        {% endif %}
+
+        <form method="post">
+            <div class="field">
+                <label for="name">Name</label>
+                <input type="text" name="name" placeholder="Name" value="{{ company.name }}" required />
+                <span class="help">The name of your company.</span>
+            </div>
+
+            <div class="field">
+                <label for="description">Description</label>
+                <textarea name="description" placeholder="Description">{{ company.description }}</textarea>
+                <span class="help">What are you making?</span>
+            </div>
+
+            {% if me.is_admin %}
+                <h2>Special Properties</h2>
+                <div class="field">
+                    <label for="is_admin">Admin Company</label>
+                    <input type="checkbox" name="is_admin" {% if company.is_admin %}checked{% endif %} />
+                    <span class="help">If true, members of this company will get admin powers.</span>
+                </div>
+
+                <div class="field">
+                    <label for="is_adviser">Advisor Company</label>
+                    <input type="checkbox" name="is_adviser" {% if company.is_adviser %}checked{% endif %} />
+                    <span class="help">If true, members of this company will be able to create office hours.</span>
+                </div>
+            {% endif %}
+
+            <input type="submit" value="Update" />
+        </form>
+    </section>
 {% endblock %}

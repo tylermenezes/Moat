@@ -1,6 +1,7 @@
 <?php
 
 use \Moat\Models;
+use \Moat\Traits;
 
 /**
  * 

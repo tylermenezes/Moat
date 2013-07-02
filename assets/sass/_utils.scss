@@ -83,7 +83,7 @@ section.warning
 }
 
 section.content {
-    width: 50em;
+    width: 60em;
     margin: 0 auto;
     background-color: #fff;
     font-family: "freight-sans-pro", sans-serif;
@@ -173,7 +173,6 @@ section.content {
 
     h2:first-child {
         margin-top: 0;
-        padding-top: 1em;
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -248,7 +247,12 @@ section.content {
 
         input, textarea, select {
             float: left;
-            width: 30em;
+            width: 40em;
+        }
+
+
+        input[type="checkbox"] {
+            width: auto;
         }
 
         textarea {
@@ -300,4 +304,18 @@ table {
             border-bottom: none;
         }
     }
+}
+
+a.facebook {
+    border: 0;
+    background-color: #3B5998;
+    @include rounded(3px);
+    padding: 0.5em;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: "brandon-grotesque", sans-serif;
+    font-size: 0.8em;
+    text-decoration: none;
+    display: inline-block;
 }

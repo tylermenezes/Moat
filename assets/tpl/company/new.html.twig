@@ -1,0 +1,37 @@
+{% extends "template.html.twig" %}
+{% block content %}
+<section class="content company edit">
+    <header>
+        <h1>New Company</h1>
+    </header>
+
+    <form method="post">
+        <div class="field">
+            <label for="name">Name</label>
+            <input type="text" name="name" placeholder="Name" value="" required />
+            <span class="help">The name of your company.</span>
+        </div>
+
+        <div class="field">
+            <label for="description">Description</label>
+            <textarea name="description" placeholder="Description"></textarea>
+            <span class="help">What are you making?</span>
+        </div>
+
+        <h2>Special Properties</h2>
+        <div class="field">
+            <label for="is_admin">Admin Company</label>
+            <input type="checkbox" name="is_admin" />
+            <span class="help">If true, members of this company will get admin powers.</span>
+        </div>
+
+        <div class="field">
+            <label for="is_adviser">Advisor Company</label>
+            <input type="checkbox" name="is_adviser" />
+            <span class="help">If true, members of this company will be able to create office hours.</span>
+        </div>
+
+        <input type="submit" value="Update" />
+    </form>
+</section>
+{% endblock %}

@@ -21,7 +21,7 @@ section.warning {
     transform: scale(-1, 1); }
 
 section.content {
-  width: 50em;
+  width: 60em;
   margin: 0 auto;
   background-color: #fff;
   font-family: "freight-sans-pro", sans-serif;
@@ -108,8 +108,7 @@ section.content {
         height: 0;
         clear: both; }
   section.content h2:first-child {
-    margin-top: 0;
-    padding-top: 1em; }
+    margin-top: 0; }
   section.content h1, section.content h2, section.content h3, section.content h4, section.content h5, section.content h6 {
     margin-bottom: 0; }
   section.content p {
@@ -184,7 +183,9 @@ section.content div.field {
     width: 10em; }
   section.content div.field input, section.content div.field textarea, section.content div.field select {
     float: left;
-    width: 30em; }
+    width: 40em; }
+  section.content div.field input[type="checkbox"] {
+    width: auto; }
   section.content div.field textarea {
     height: 5em; }
   section.content div.field .help, section.content div.field img {
@@ -217,6 +218,30 @@ table {
     border-bottom: 1px solid #D7D7D7; }
   table tbody tr:last-child td {
     border-bottom: none; }
+
+a.facebook {
+  border: 0;
+  background-color: #3B5998;
+  -webkit-border-top-left-radius: 3px;
+  -webkit-border-top-right-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-topright: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  -moz-border-radius-bottomright: 3px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  padding: 0.5em;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: "brandon-grotesque", sans-serif;
+  font-size: 0.8em;
+  text-decoration: none;
+  display: inline-block; }
 
 body {
   margin: 0;
@@ -382,6 +407,9 @@ ul.directory {
             margin-bottom: 0.5em;
             overflow: hidden;
             text-overflow: ellipsis; }
+            ul.directory li.team ul li.info .name a {
+              color: #fff;
+              text-decoration: none; }
           ul.directory li.team ul li.info .description {
             font-family: "brevia", sans-serif;
             display: block;
@@ -658,6 +686,87 @@ section.friends table td.name {
     height: 1em;
     margin-right: 0.5em; }
 
+.user.view p {
+  margin: 0; }
+.user.view img {
+  float: left;
+  width: 13em;
+  height: 13em; }
+.user.view .info {
+  float: left;
+  width: 37em; }
+  .user.view .info h2 {
+    border-bottom: 1px solid #d7d7d7;
+    clear: both; }
+  .user.view .info label {
+    float: left;
+    width: 5em;
+    clear: both; }
+  .user.view .info p {
+    float: left; }
+.user.view h2 {
+  clear: both; }
+.user.view .companies {
+  clear: both;
+  padding-top: 1em; }
+  .user.view .companies ul {
+    padding: 0; }
+    .user.view .companies ul li {
+      list-style-type: none;
+      float: left;
+      display: block;
+      width: 11em;
+      height: 11em;
+      margin: 0.25em;
+      background: #fff;
+      padding: 1em;
+      overflow: hidden;
+      -webkit-border-top-left-radius: 3px;
+      -webkit-border-top-right-radius: 3px;
+      -webkit-border-bottom-left-radius: 3px;
+      -webkit-border-bottom-right-radius: 3px;
+      -moz-border-radius-topleft: 3px;
+      -moz-border-radius-topright: 3px;
+      -moz-border-radius-bottomleft: 3px;
+      -moz-border-radius-bottomright: 3px;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      border-bottom-left-radius: 3px;
+      border-bottom-right-radius: 3px;
+      background-color: #DA3610;
+      position: relative;
+      height: 11.25em;
+      top: -0.25em; }
+      .user.view .companies ul li:first-child {
+        margin-left: 0; }
+      .user.view .companies ul li:last-child {
+        margin-right: 0; }
+      .user.view .companies ul li .name {
+        font-family: "brandon-grotesque", sans-serif;
+        font-weight: 900;
+        display: block;
+        font-size: 1.5em;
+        text-transform: uppercase;
+        color: #fff;
+        width: 100%;
+        line-height: 1em;
+        margin-bottom: 0.5em;
+        overflow: hidden;
+        text-overflow: ellipsis; }
+        .user.view .companies ul li .name a {
+          color: #fff;
+          text-decoration: none; }
+      .user.view .companies ul li .description {
+        font-family: "brevia", sans-serif;
+        display: block;
+        position: absolute;
+        bottom: 2em;
+        padding-right: 1em;
+        max-height: 9em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #fff;
+        font-size: 0.7em; }
 .user ul.social-connect li {
   list-style-type: none;
   display: block;
@@ -692,3 +801,123 @@ section.friends table td.name {
     background-color: #1381BB; }
   .user ul.social-connect li.twitter.unlinked a {
     background-color: #00ACEE; }
+
+section.company.view ul.members li {
+  list-style-type: none;
+  float: left;
+  display: block;
+  width: 11em;
+  height: 11em;
+  margin: 0.25em;
+  background: #fff;
+  padding: 1em;
+  overflow: hidden;
+  -webkit-border-top-left-radius: 3px;
+  -webkit-border-top-right-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-topright: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  -moz-border-radius-bottomright: 3px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  padding: 1em;
+  height: 11em;
+  position: relative; }
+  section.company.view ul.members li:first-child {
+    margin-left: 0; }
+  section.company.view ul.members li:last-child {
+    margin-right: 0; }
+  section.company.view ul.members li img {
+    position: absolute;
+    width: 13em;
+    height: 13em;
+    display: block;
+    top: 0;
+    left: 0; }
+  section.company.view ul.members li .details {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.5em;
+    background: rgba(35, 48, 57, 0.6); }
+    section.company.view ul.members li .details .name {
+      display: block;
+      width: 100%;
+      margin-bottom: 0.2em; }
+      section.company.view ul.members li .details .name .first, section.company.view ul.members li .details .name .last {
+        display: inline;
+        color: #fff;
+        font-weight: bold;
+        font-family: "brandon-grotesque", sans-serif;
+        letter-spacing: 0.1em;
+        font-size: 1em;
+        text-transform: uppercase; }
+    section.company.view ul.members li .details .phone, section.company.view ul.members li .details .email a {
+      display: block;
+      color: #ddd;
+      font-size: 0.7em;
+      font-family: "brevia", sans-serif;
+      text-decoration: none; }
+      section.company.view ul.members li .details .phone .gc-cs-link, section.company.view ul.members li .details .email a .gc-cs-link {
+        text-decoration: none;
+        color: #ddd; }
+
+section.hours ul.blocks > li {
+  list-style-type: none;
+  margin-bottom: 3em; }
+  section.hours ul.blocks > li h2 {
+    font-family: "brandon-grotesque", sans-serif;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    border-bottom: 1px solid #d7d7d7; }
+    section.hours ul.blocks > li h2 img {
+      width: 1em;
+      height: 1em; }
+  section.hours ul.blocks > li .action a, section.hours ul.blocks > li .admin a {
+    border: 0;
+    background-color: #e5e5e5;
+    -webkit-border-top-left-radius: 2px;
+    -webkit-border-top-right-radius: 2px;
+    -webkit-border-bottom-left-radius: 2px;
+    -webkit-border-bottom-right-radius: 2px;
+    -moz-border-radius-topleft: 2px;
+    -moz-border-radius-topright: 2px;
+    -moz-border-radius-bottomleft: 2px;
+    -moz-border-radius-bottomright: 2px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    padding: 0 0.5em;
+    color: #585858;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: "brandon-grotesque", sans-serif;
+    font-size: 0.8em;
+    text-decoration: none;
+    display: inline-block; }
+  section.hours ul.blocks > li > .admin {
+    float: right; }
+  section.hours ul.blocks > li ul.slots {
+    padding: 0; }
+    section.hours ul.blocks > li ul.slots li {
+      list-style-type: none;
+      padding: 0.2em 0; }
+      section.hours ul.blocks > li ul.slots li .time {
+        display: inline-block;
+        width: 4em; }
+      section.hours ul.blocks > li ul.slots li .who {
+        display: inline-block;
+        width: 10em; }
+      section.hours ul.blocks > li ul.slots li .action {
+        display: inline-block;
+        float: right; }
+      section.hours ul.blocks > li ul.slots li:nth-child(even) {
+        background-color: #efefef; }
+      section.hours ul.blocks > li ul.slots li.noshow .who {
+        color: #DA3610; }

@@ -14,8 +14,50 @@
             </nav>
         {% endif %}
 
-        {% if hours %}
+        {% if upcoming_blocks|length > 0 %}
+            <ul class="blocks">
+                {% for block in upcoming_blocks %}
+                    <li>
+                        <h2>
+                            {{ block.starts_at|date('D, M jS, g:i a') }} &mdash;
+                            <a href="/user/{{ block.user.username }}">
+                                <img src="{{ block.user.photo_websafe }}" /> {{ block.user.name }}
+                            </a>
+                        </h2>
+                        {% if slot.block.user.id == me.id or me.is_admin %}
+                            <span class="admin"><a href="/hours/cancel/block/{{ block.id }}">Delete Block</a></span>
+                        {% endif %}
+                        <p>{{ block.description }}</p>
+                        <ul class="slots">
+                            {% for slot in block.slots %}
+                                <li {% if slot.noshow %}class="noshow"{% endif %}>
+                                    <span class="time">{{ slot.starts_at|date('g:i') }}</span>
+                                    <span class="who">{{ slot.user.name }}</span>
+                                    <span class="action">
+                                        {% if slot.user.id == me.id and not slot.has_started %}
+                                            <a href="/hours/release/{{ slot.id }}">Cancel</a>
+                                        {% endif %}
+                                        {% if not slot.user and not slot.has_started%}
+                                            <a href="/hours/book/{{ slot.id }}">Book</a>
+                                        {% endif %}
+                                    </span>
 
+                                    {% if slot.block.user.id == me.id or me.is_admin %}
+                                        <span class="admin">
+                                            {% if not slot.has_started %}
+                                                <a href="/hours/cancel/slot/{{ slot.id }}">Delete Slot</a>
+                                            {% endif %}
+                                            {% if not slot.noshow and slot.has_started %}
+                                                <a href="/hours/noshow/{{ slot.id }}">No-show</a>
+                                            {% endif %}
+                                        </span>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
         {% else %}
             <p>No slots available.</p>
         {% endif %}

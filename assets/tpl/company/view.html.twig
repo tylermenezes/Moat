@@ -1,11 +1,37 @@
 {% extends "template.html.twig" %}
 {% block content %}
-    <section class="company content">
+    <section class="company view content">
         <header>
             <h1>{{ company.name }}</h1>
         </header>
-        <img src="{{ user.picture }}" />
-        <p>Email: <a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
-        <p>Phone: {{ user.phone }}</p>
+
+        {% if me.in_company(company) or me.is_admin %}
+            <nav>
+                <ul>
+                    <li class="active"><a href="/company/{{ company.id}}">View</a></li>
+                    <li><a href="/company/edit/{{ company.id}}">Edit</a></li>
+                </ul>
+            </nav>
+        {% endif %}
+
+        <p>{{ company.description }}</p>
+
+        <ul class="members">
+            {% for member in company.members %}
+                <li class="member">
+                    <a href="/user/{{ member.username }}">
+                        <img src="{{ member.photo_websafe }}" />
+                    </a>
+                    <div class="details">
+                                <span class="name">
+                                    <span class="first">{{ member.first_name }}</span>
+                                    <span class="last">{{ member.last_name }}</span>
+                                </span>
+                        <span class="phone">{{ member.formatted_phone }}</span>
+                        <span class="email"><a href="mailto:{{ member.email }}">{{ member.email }}</a></span>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
     </section>
 {% endblock %}

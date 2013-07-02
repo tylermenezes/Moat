@@ -1,0 +1,59 @@
+{% extends "template.html.twig" %}
+{% block content %}
+    <section class="user edit content">
+        <header>
+            <h1>Manage Companies</h1>
+        </header>
+
+        {% if me.username == user.username or me.is_admin %}
+            <nav>
+                <ul>
+                    <li><a href="/user/{{ user.username }}">View</a></li>
+                    <li><a href="/user/edit/{{ user.username }}">Edit</a></li>
+                    {% if me.username == user.username %}
+                        <li><a href="/user/link">Social Media</a></li>
+                    {% endif %}
+                    {% if me.is_admin and user.username != me.username %}
+                        <li><a href="/user/impersonate/{{ user.username }}">Impersonate</a></li>
+                    {% endif %}
+                    {% if me.is_admin %}
+                        <li class="active"><a href="/user/companies/{{ user.username }}">Companies</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endif %}
+
+        <h1>Add to Company</h1>
+        <form method="post" action="/user/companies/add/{{ user.username }}">
+            <div class="field">
+                <label for="add">Company</label>
+                <select name="add">
+                    {% for company in current_cohort.companies %}
+                        {% if not user.in_company(company) %}
+                            <option value="{{ company.id }}">{{ company.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <span class="help">The company to add the user to.</span>
+            </div>
+
+            <input type="submit" value="Add" />
+        </form>
+
+        <h1>Remove from Company</h1>
+        <form method="post" action="/user/companies/remove/{{ user.username }}">
+            <div class="field">
+                <label for="remove">Company</label>
+                <select name="remove">
+                    {% for company in user.companies %}
+                        <option value="{{ company.id }}">{{ company.name }}</option>
+                    {% endfor %}
+                </select>
+                <span class="help">The company to remove the user from.</span>
+            </div>
+
+            <input type="submit" value="Remove" />
+        </form>
+
+    </section>
+{% endblock %}

@@ -22,6 +22,7 @@ class User extends \TinyDb\Orm
     public $password;
     public $first_name;
     public $last_name;
+    public $bio;
     public $email;
     public $phone;
     public $photo;
@@ -130,5 +131,15 @@ class User extends \TinyDb\Orm
             'userID' => $this->id,
             'companyID' => $company->id
         ]);
+    }
+
+    public function quit(Company $company)
+    {
+        Mappings\UserCompany::find()->where('companyID = ?', $company->id)->where('userID = ?', $this->id)->one()->delete();
+    }
+
+    public function in_company(Company $company)
+    {
+        return Mappings\UserCompany::find()->where('userID = ?', $this->id)->where('companyID = ?', $company->id)->limit(1)->exists();
     }
 }

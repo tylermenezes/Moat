@@ -1,11 +1,62 @@
 {% extends "template.html.twig" %}
 {% block content %}
-    <section class="user content">
+    <section class="user view content">
         <header>
             <h1>{{ user.name }}</h1>
         </header>
-        <img src="{{ user.picture }}" />
-        <p>Email: <a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
-        <p>Phone: {{ user.phone }}</p>
+
+        {% if me.username == user.username or me.is_admin %}
+            <nav>
+                <ul>
+                    <li class="active"><a href="/user/{{ user.username }}">View</a></li>
+                    <li><a href="/user/edit/{{ user.username }}">Edit</a></li>
+                    {% if me.username == user.username %}
+                        <li><a href="/user/link">Social Media</a></li>
+                    {% endif %}
+                    {% if me.is_admin and user.username != me.username %}
+                        <li><a href="/user/impersonate/{{ user.username }}">Impersonate</a></li>
+                    {% endif %}
+                    {% if me.is_admin %}
+                        <li><a href="/user/companies/{{ user.username }}">Companies</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endif %}
+
+        <img src="{{ user.photo_websafe }}" />
+        <div class="info">
+            <h2>Contact Info</h2>
+            <label>Email</label>
+            <p><a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+
+            <label>Phone</label>
+            <p>{{ user.phone }}</p>
+
+            <label>Social</label>
+            <p>
+                {% if user.id != me.id and not me.facebook_friends_with(user) %}
+                    <a class="facebook" target="_blank" href="https://www.facebook.com/addfriend.php?id={{ member.facebook.service_user_id }}">
+                        Add Facebook Friend
+                    </a>
+                {% elseif user.facebook %}
+                    <a class="facebook" target="_blank" href="https://www.facebook.com/{{ user.facebook.service_user_id }}">Facebook</a>
+                {% endif %}
+            </p>
+
+            <h2>Bio</h2>
+            <p>{{ user.bio }}</p>
+
+            <div class="companies">
+                <h2>Companies</h2>
+                <ul>
+                    {% for company in user.companies %}
+                        <li>
+                            <span class="name"><a href="/company/{{ company.id }}">{{ company.name }}</a></span>
+                            <span class="description">{{ company.description }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
     </section>
 {% endblock %}

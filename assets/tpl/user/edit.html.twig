@@ -14,63 +14,77 @@
         </section>
     {% endif %}
 
-    <section class="user edit content">
-        <header>
-            <h1>
-                {% if me.username == user.username %}
-                    Check yourself.
-                {% else %}
-                    Editing {{ user.name }} ({{ user.username }})
-                {% endif %}
-            </h1>
-        </header>
+        <section class="user edit content">
+            <header>
+                <h1>
+                    {% if me.username == user.username %}
+                        Check yourself.
+                    {% else %}
+                        Editing {{ user.name }} ({{ user.username }})
+                    {% endif %}
+                </h1>
+            </header>
 
-        {% if me.username == user.username %}
-            <nav>
-                <ul>
-                    <li class="active"><a href="/user/{{ me.username }}">Profile Information</a></li>
-                    <li><a href="/user/link">Social Media</a></li>
-                </ul>
-            </nav>
-        {% endif %}
-
-        <form method="post" enctype="multipart/form-data">
-            <h2>Basic Info</h2>
-            {% if me.is_admin %}
-                <div class="field">
-                    <label for="username">Username</label>
-                    <input type="text" name="username" value="{{ user.username }}" placeholder="Username" required />
-                    <span class="help">This field can only be changed by administrators.</span>
-                </div>
+            {% if me.username == user.username or me.is_admin %}
+                <nav>
+                    <ul>
+                        <li><a href="/user/{{ user.username }}">View</a></li>
+                        <li class="active"><a href="/user/edit/{{ user.username }}">Edit</a></li>
+                        {% if me.username == user.username %}
+                            <li><a href="/user/link">Social Media</a></li>
+                        {% endif %}
+                        {% if me.is_admin and user.username != me.username %}
+                            <li><a href="/user/impersonate/{{ user.username }}">Impersonate</a></li>
+                        {% endif %}
+                        {% if me.is_admin %}
+                            <li><a href="/user/companies/{{ user.username }}">Companies</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
             {% endif %}
-            <div class="field">
-                <label for="photo">Profile Photo</label>
-                <input type="file" name="photo" accept="image/*" />
-                <img src="{{ user.photo_websafe }}" />
-                <span class="help">This will replace your uploaded photo.</span>
-            </div>
-            <div class="field">
-                <label for="first_name">First Name</label>
-                <input type="text" name="first_name" value="{{ user.first_name }}" placeholder="First Name" required />
-            </div>
-            <div class="field">
-                <label for="last_name">Last Name</label>
-                <input type="text" name="last_name" value="{{ user.last_name }}" placeholder="Last Name" required />
-            </div>
 
-            <h2>Contact Information</h2>
-            <div class="field">
-                <label for="Phone">Phone Number</label>
-                <input type="text" name="phone" value="{{ user.phone }}" placeholder="(555) 555-5555" required />
-                <span class="help">We'll use this number if we need to contact you, and it will be displayed on the directory.</span>
-            </div>
-            <div class="field">
-                <label for="email">Email Address</label>
-                <input type="email" name="email" value="{{ user.email }}" placeholder="me@me.com" required />
-                <span class="help">Notifications will be sent here, and it will be displayed on the directory.</span>
-            </div>
+            <form method="post" enctype="multipart/form-data">
+                <h2>Basic Info</h2>
+                {% if me.is_admin %}
+                    <div class="field">
+                        <label for="username">Username</label>
+                        <input type="text" name="username" value="{{ user.username }}" placeholder="Username" required />
+                        <span class="help">This field can only be changed by administrators.</span>
+                    </div>
+                {% endif %}
+                <div class="field">
+                    <label for="photo">Profile Photo</label>
+                    <input type="file" name="photo" accept="image/*" />
+                    <img src="{{ user.photo_websafe }}" />
+                    <span class="help">This will replace your uploaded photo.</span>
+                </div>
+                <div class="field">
+                    <label for="first_name">First Name</label>
+                    <input type="text" name="first_name" value="{{ user.first_name }}" placeholder="First Name" required />
+                </div>
+                <div class="field">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" name="last_name" value="{{ user.last_name }}" placeholder="Last Name" required />
+                </div>
+                <div class="field">
+                    <label for="bio">Bio</label>
+                    <textarea name="bio">{{ user.bio }}</textarea>
+                    <span class="help">Some information about you for your profile page.</span>
+                </div>
 
-            <input type="submit" value="Update" />
-        </form>
-    </section>
+                <h2>Contact Information</h2>
+                <div class="field">
+                    <label for="Phone">Phone Number</label>
+                    <input type="text" name="phone" value="{{ user.phone }}" placeholder="(555) 555-5555" required />
+                    <span class="help">We'll use this number if we need to contact you, and it will be displayed on the directory.</span>
+                </div>
+                <div class="field">
+                    <label for="email">Email Address</label>
+                    <input type="email" name="email" value="{{ user.email }}" placeholder="me@me.com" required />
+                    <span class="help">Notifications will be sent here, and it will be displayed on the directory.</span>
+                </div>
+
+                <input type="submit" value="Update" />
+            </form>
+        </section>
 {% endblock %}

@@ -33,6 +33,9 @@ class db {
                 'last_name' => [
                     'type' => 'varchar(255)'
                 ],
+                'bio' => [
+                    'type' => 'text'
+                ],
                 'email' => [
                     'type' => 'varchar(255)'
                 ],
@@ -202,6 +205,58 @@ class db {
                 'cohortID' => [
                     'type' => 'int',
                     'null' => true
+                ]
+            ]);
+        }
+
+        if (!\TinyDb\Query::table_exists('officehours_blocks')) {
+            echo "  * Creating table officehours_blocks.\n";
+            \TinyDb\Query::create_table('officehours_blocks', [
+                'blockID' => [
+                    'type' => 'int',
+                    'auto_increment' => true,
+                    'key' => 'primary'
+                ],
+                'starts_at' => [
+                    'type' => 'datetime'
+                ],
+                'userID' => [
+                    'type' => 'int'
+                ],
+                'description' => [
+                    'type' => 'text',
+                    'null' => true
+                ]
+            ]);
+        }
+
+        if (!\TinyDb\Query::table_exists('officehours_slots')) {
+            echo "  * Creating table officehours_slots.\n";
+            \TinyDb\Query::create_table('officehours_slots', [
+                'slotID' => [
+                    'type' => 'int',
+                    'auto_increment' => true,
+                    'key' => 'primary'
+                ],
+                'blockID' => [
+                    'type' => 'int'
+                ],
+                'starts_at' => [
+                    'type' => 'datetime'
+                ],
+                'userID' => [
+                    'type' => 'int',
+                    'null' => true
+                ],
+                'noshow' => [
+                    'type' => 'bool',
+                    'default' => false
+                ],
+                'created_at' => [
+                    'type' => 'datetime'
+                ],
+                'modified_at' => [
+                    'type' => 'datetime'
                 ]
             ]);
         }

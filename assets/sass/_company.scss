@@ -1,0 +1,85 @@
+section.company {
+    &.view {
+        ul.members {
+
+            li {
+
+                &:first-child {
+                    margin-left: 0;
+                }
+
+                &:last-child {
+                    margin-right: 0;
+                }
+
+                list-style-type: none;
+                float: left;
+
+                display: block;
+                width: 11em;
+                height: 11em;
+                margin: 0.25em;
+                background: #fff;
+
+                padding: 1em;
+                overflow: hidden;
+
+                @include rounded(3px);
+
+                padding: 1em;
+                height: 11em;
+                position: relative;
+
+                img {
+                    position: absolute;
+                    width: 13em;
+                    height: 13em;
+                    display: block;
+                    top: 0;
+                    left: 0;
+                }
+
+                .details {
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    padding: 0.5em;
+
+                    background: rgba(35, 48, 57, 0.6);
+
+                    .name {
+                        display: block;
+                        width: 100%;
+                        margin-bottom: 0.2em;
+
+                        .first, .last {
+                            display: inline;
+                            color: #fff;
+                            font-weight: bold;
+                            font-family: "brandon-grotesque", sans-serif;
+                            letter-spacing: 0.1em;
+                            font-size: 1em;
+                            text-transform: uppercase;
+                        }
+                    }
+
+                    .phone, .email a {
+                        display: block;
+                        color: #ddd;
+                        font-size: 0.7em;
+                        font-family: "brevia", sans-serif;
+
+                        text-decoration: none;
+
+                        .gc-cs-link {
+                            text-decoration: none;
+                            color: #ddd;
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}

@@ -83,7 +83,7 @@ class register {
 
         // Finish up!
         $user->login();
-        $this->redirect('/directory');
+        $this->redirect('/user/link');
     }
 
     protected function display_registration($additional_information = [])

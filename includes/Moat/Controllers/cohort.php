@@ -4,19 +4,19 @@ use \Moat\Models;
 use \Moat\Traits;
 
 /**
- * Shows the directory of people
+ * 
  * 
  * @author      Tyler Menezes <tylermenezes@gmail.com>
  * @copyright   Copyright (c) Tyler Menezes. Released under the BSD license.
  *
  */
-class directory_c {
+class cohort {
     use \CuteControllers\Controller;
-    use Traits\NeedsCohort;
     use Traits\NeedsLogin;
 
-    public function action_index()
+    public function action_index($new)
     {
-        echo \Moat::$twig->render('directory.html.twig');
+        Models\Cohort::find()->where('slug = ?', $new)->one()->set_current();
+        $this->redirect($_SERVER['HTTP_REFERER']);
     }
 }

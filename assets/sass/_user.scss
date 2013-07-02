@@ -1,4 +1,119 @@
 .user {
+    &.view {
+        p {
+            margin: 0;
+        }
+
+        img {
+            float: left;
+            width: 13em;
+            height: 13em;
+        }
+
+        .info {
+            float: left;
+            width: 37em;
+
+
+            h2 {
+                border-bottom: 1px solid $border_color;
+                clear: both;
+            }
+
+            label {
+                float: left;
+                width: 5em;
+                clear: both;
+            }
+
+            p {
+                float: left;
+            }
+        }
+
+        h2 {
+            clear: both;
+        }
+
+        .companies {
+            clear: both;
+            padding-top: 1em;
+
+            ul {
+                padding: 0;
+
+                li {
+
+                    &:first-child {
+                        margin-left: 0;
+                    }
+
+                    &:last-child {
+                        margin-right: 0;
+                    }
+
+                    list-style-type: none;
+                    float: left;
+
+                    display: block;
+                    width: 11em;
+                    height: 11em;
+                    margin: 0.25em;
+                    background: #fff;
+
+                    padding: 1em;
+                    overflow: hidden;
+
+                    @include rounded(3px);
+
+                    background-color: #DA3610;
+                    position: relative;
+
+                    height: 11.25em;
+                    top: -0.25em;
+
+                    .name {
+                        font-family: "brandon-grotesque", sans-serif;
+                        font-weight: 900;
+                        display: block;
+
+                        font-size: 1.5em;
+                        text-transform: uppercase;
+                        color: #fff;
+                        width: 100%;
+                        line-height: 1em;
+
+                        margin-bottom: 0.5em;
+
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+
+                        a {
+                            color: #fff;
+                            text-decoration: none;
+                        }
+                    }
+
+                    .description {
+                        font-family: "brevia", sans-serif;
+                        display: block;
+
+                        position: absolute;
+                        bottom: 2em;
+                        padding-right: 1em;
+
+                        max-height: 9em;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+
+                        color: #fff;
+                        font-size: 0.7em;
+                    }
+                }
+            }
+        }
+    }
+
     ul.social-connect {
         li {
             list-style-type: none;

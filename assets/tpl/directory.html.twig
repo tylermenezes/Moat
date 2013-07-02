@@ -12,7 +12,7 @@
             <li class="team">
                 <ul>
                     <li class="info">
-                        <span class="name">{{ company.name }}</span>
+                        <span class="name"><a href="/company/{{ company.id }}">{{ company.name }}</a></span>
                         <span class="description">{{ company.description }}</span>
                     </li>
                     {% for member in company.members %}

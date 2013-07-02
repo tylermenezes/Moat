@@ -1,0 +1,69 @@
+section.hours {
+    ul.blocks {
+        & > li {
+            list-style-type: none;
+            margin-bottom: 3em;
+
+            h2 {
+                font-family: "brandon-grotesque", sans-serif;;
+                text-transform: uppercase;
+                font-size: 0.8em;
+                border-bottom: 1px solid $border_color;
+
+                img {
+                    width: 1em;
+                    height: 1em;
+                }
+            }
+
+            .action a, .admin a {
+                border: 0;
+                background-color: $hover_bg_color;
+                @include rounded(2px);
+                padding: 0 0.5em;
+                color: $hover_fg_color;
+                text-transform: uppercase;
+                font-weight: bold;
+                font-family: "brandon-grotesque", sans-serif;
+                font-size: 0.8em;
+                text-decoration: none;
+                display: inline-block;
+            }
+
+            & > .admin {
+                float: right;
+            }
+
+            ul.slots {
+                padding: 0;
+                li {
+                    list-style-type: none;
+                    .time {
+                        display: inline-block;
+                        width: 4em;
+                    }
+
+                    .who {
+                        display: inline-block;
+                        width: 10em;
+                    }
+
+                    .action {
+                        display: inline-block;
+                        float: right;
+                    }
+
+                    padding: 0.2em 0;
+
+                    &:nth-child(even) {
+                        background-color: #efefef;
+                    }
+
+                    &.noshow .who {
+                        color: #DA3610;
+                    }
+                }
+            }
+        }
+    }
+}

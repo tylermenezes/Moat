@@ -13,6 +13,7 @@ use \Moat\Traits;
 class index {
     use \CuteControllers\Controller;
     use Traits\NeedsLogin;
+    use Traits\NeedsCohort;
 
     public function get_index($username)
     {
@@ -22,11 +23,7 @@ class index {
             throw new \CuteControllers\HttpError(404);
         }
 
-        if (Models\User::me()->username === $username || Models\User::me()->is_admin) {
-            echo \Moat::$twig->render('user/edit.html.twig', ['user' => $user]);
-        } else {
-            echo \Moat::$twig->render('user/view.html.twig', ['user' => $user]);
-        }
+        echo \Moat::$twig->render('user/view.html.twig', ['user' => $user]);
     }
 
     public function get_link()
@@ -34,7 +31,38 @@ class index {
         echo \Moat::$twig->render('user/link.html.twig');
     }
 
-    public function post_index($username)
+    public function get_impersonate($username)
+    {
+        if (!Models\User::me()->is_admin) {
+            throw new \CuteControllers\HttpError(403);
+        }
+
+        try {
+            $user = Models\User::find()->where('username = ?', $username)->one();
+        } catch (\TinyDb\NoRecordException $ex) {
+            throw new \CuteControllers\HttpError(404);
+        }
+
+        $user->login();
+        $this->redirect('/');
+    }
+
+    public function get_edit($username)
+    {
+        try {
+            $user = Models\User::find()->where('username = ?', $username)->one();
+        } catch (\TinyDb\NoRecordException $ex) {
+            throw new \CuteControllers\HttpError(404);
+        }
+
+        if (Models\User::me()->username !== $username && !Models\User::me()->is_admin) {
+            throw new \CuteControllers\HttpError(403);
+        }
+
+        echo \Moat::$twig->render('user/edit.html.twig', ['user' => $user]);
+    }
+
+    public function post_edit($username)
     {
         try {
             $user = Models\User::find()->where('username = ?', $username)->one();
@@ -64,7 +92,8 @@ class index {
             exit;
         }
 
-        if (isset($_FILES["photo"])) {
+
+        if (isset($_FILES["photo"]) && $_FILES["photo"]["error"] === 0) {
             $image = new \Image($_FILES["photo"]["tmp_name"]);
             $image->fill(200, 200);
             $filename = md5(time() . rand(0,50000)) . '.jpg';
@@ -76,6 +105,7 @@ class index {
         $user->last_name = $this->request->post('last_name');
         $user->phone = $phone;
         $user->email = $this->request->post('email');
+        $user->bio = $this->request->post('bio');
 
         if (Models\User::me()->is_admin) {
             $this->require_post('username');

@@ -1,6 +1,6 @@
 <?php
 
-namespace Moat\Models;
+namespace Moat\Models\OfficeHours;
 
 
 /**
@@ -21,4 +21,18 @@ class Slot extends \TinyDb\Orm {
      */
     public $blockID;
     public $starts_at;
+
+    /**
+     * @foreign \Moat\Models\User user
+     */
+    public $userID;
+
+    public $created_at;
+    public $updated_at;
+    public $noshow;
+
+    public function get_has_started()
+    {
+        return time() >= $this->starts_at;
+    }
 }

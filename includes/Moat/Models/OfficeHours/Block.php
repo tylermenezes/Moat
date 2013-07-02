@@ -1,6 +1,6 @@
 <?php
 
-namespace Moat\Models;
+namespace Moat\Models\OfficeHours;
 
 
 /**
@@ -21,4 +21,10 @@ class Block extends \TinyDb\Orm {
      */
     public $userID;
     public $description;
+    public $starts_at;
+
+    public function get_slots()
+    {
+        return Slot::find()->where('blockID = ?', $this->id)->all();
+    }
 }

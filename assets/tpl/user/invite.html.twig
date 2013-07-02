@@ -1,0 +1,47 @@
+{% extends "template.html.twig" %}
+{% block content %}
+    {% if code %}
+        <section class="warning">
+            Created code: {{ code }}
+        </section>
+    {% endif %}
+
+    <section class="content company edit">
+        <header>
+            <h1>Invite User</h1>
+        </header>
+
+        <form method="post">
+            <div class="field">
+                <label for="email">Email</label>
+                <input type="text" name="email" />
+                <span class="help">Optional, email address to send the invite to.</span>
+            </div>
+
+            <div class="field">
+                <label for="code">Code</label>
+                <input type="text" name="code" placeholder="Name" />
+                <span class="help">Optional, code to use. If left blank, one will be generated.</span>
+            </div>
+
+            <div class="field">
+                <label for="company">Company</label>
+                <select name="company">
+                    <option value="">(no company)</option>
+                    {% for company in current_cohort.companies %}
+                        <option value="{{ company.id }}">{{ company.name }}</option>
+                    {% endfor %}
+                </select>
+                <span class="help">If selected, the user will be automatically added to this company.</span>
+            </div>
+
+            <div class="field">
+                <label for="group">Group Code?</label>
+                <input type="checkbox" name="group" />
+                <span class="help">If unchecked, the code will expire after its first use.</span>
+            </div>
+
+            <input type="submit" value="Update" />
+        </form>
+    </section>
+{% endblock %}
