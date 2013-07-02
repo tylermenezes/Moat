@@ -47,7 +47,7 @@
                                             {% if not slot.has_started %}
                                                 <a href="/hours/cancel/slot/{{ slot.id }}">Delete Slot</a>
                                             {% endif %}
-                                            {% if not slot.noshow and slot.has_started %}
+                                            {% if not slot.noshow and slot.has_started and slot.user %}
                                                 <a href="/hours/noshow/{{ slot.id }}">No-show</a>
                                             {% endif %}
                                         </span>
