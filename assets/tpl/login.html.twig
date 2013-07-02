@@ -1,5 +1,5 @@
 {% extends "template.html.twig" %}
-
+{% block active %}login{% endblock %}
 {% block content %}
     {% if invalid_login %}
         <section class="warning">
@@ -7,10 +7,22 @@
         </section>
     {% endif %}
 
-    <form class="login" method="post">
-        <p>If you do not have an account, please talk to Tyler.</p>
-        <input type="text" name="username" placeholder="Username" />
-        <input type="password" name="password" placeholder="Password" />
-        <input type="submit" value="Login" />
-    </form>
+    <section class="login content">
+        <header>
+            <h1>Welcome, welcome!</h1>
+        </header>
+
+        <section>
+            <p>Moat is a private community for StudentRND Labs participants. If you don't have a login, or forgot yours, contact
+            <a href="mailto:tylermenezes@studentrnd.org">Tyler Menezes</a>.</p>
+            <p>Want to offer a deal to Labs participants? <a href="/deals/submit">Submit a deal here.</a></p>
+        </section>
+
+        <form method="post">
+            <h1>Login</h1>
+            <input type="text" name="username" placeholder="Username" />
+            <input type="password" name="password" placeholder="Password" />
+            <input type="submit" value="Login" />
+        </form>
+    </section>
 {% endblock %}

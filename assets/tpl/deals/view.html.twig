@@ -1,0 +1,50 @@
+{% extends "template.html.twig" %}
+{% block active %}deals{% endblock %}
+{% block content %}
+    <section class="content deals">
+        <header>
+            <h1>Deals</h1>
+        </header>
+
+        {% if me %}
+            <nav>
+                <ul>
+                    <li class="active"><a href="/deals">All Deals</a></li>
+                    <li><a href="/deals/submit">Create Deal</a></li>
+                </ul>
+            </nav>
+        {% endif %}
+
+        <table>
+            <thead>
+                <tr>
+                    <td class="company">Company</td>
+                    <td class="details">Details</td>
+                    <td class="redemption">How to Redeem</td>
+                    {% if me.is_admin %}
+                        <td class="moderate">Moderate</td>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for deal in deals %}
+                    <tr>
+                        <td class="company"><a href="{{ deal.url }}">{{ deal.company }}</a></td>
+                        <td class="details">{{ deal.details }}</td>
+                        <td class="redemption">{{ deal.redemption }}</td>
+                        {% if me.is_admin %}
+                            <td class="moderate">
+                                <a href="/deals/moderate/{{ deal.id }}?approved={{ deal.approved ? 'no' : 'yes' }}">
+                                    {{ deal.approved ? 'Disapprove' : 'Approve' }}
+                                </a>
+                                {% if not deal.approved %}
+                                    <a href="/deals/moderate/{{ deal.id }}?approved=delete">Delete</a>
+                                {% endif %}
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+{% endblock %}

@@ -16,10 +16,10 @@
         {% if me %}
             <nav>
                 <ul>
-                    <li class="active"><a href="/directory">Directory</a></li>
-                    <li><a href="/friends">Friends</a></li>
-                    <li><a href="/hours">Office Hours</a></li>
-                    <li><a href="/deals">Deals</a></li>
+                    <li {% if block('active') == 'directory' %}class="active"{% endif %}><a href="/directory">Directory</a></li>
+                    <li {% if block('active') == 'friends' %}class="active"{% endif %}><a href="/friends">Friends</a></li>
+                    <li {% if block('active') == 'hours' %}class="active"{% endif %}><a href="/hours">Office Hours</a></li>
+                    <li {% if block('active') == 'deals' %}class="active"{% endif %}><a href="/deals">Deals</a></li>
                 </ul>
                 <ul class="controls">
                     {% if current_cohort and cohorts %}

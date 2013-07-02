@@ -46,7 +46,14 @@ class user {
             throw new \CuteControllers\HttpError(403);
         }
 
-        $this->require_post('first_name', 'last_name', 'email', 'phone');
+        try {
+            $this->require_post('first_name', 'last_name', 'email', 'phone');
+        } catch (\CuteControllers\HttpError $er) {
+            echo \Moat::$twig->render('user/edit.html.twig', ['user' => $user, 'missing_field' => true]);
+            exit;
+        }
+
+
         $phone = preg_replace('/[^0-9]*/', '', $this->request->post('phone'));
         if (strlen($phone) !== 10) {
             echo \Moat::$twig->render('user/edit.html.twig', ['user' => $user, 'invalid_phone' => true]);

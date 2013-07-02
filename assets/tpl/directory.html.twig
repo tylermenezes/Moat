@@ -1,5 +1,12 @@
 {% extends 'template.html.twig' %}
+{% block active %}directory{% endblock %}
 {% block content %}
+    {% if not me.has_photo %}
+        <section class="warning">
+            <a href="/user/{{ me.username }}">Please upload a photo.</a>
+        </section>
+    {% endif %}
+
     <ul class="directory">
         {% for company in current_cohort.companies %}
             <li class="team">

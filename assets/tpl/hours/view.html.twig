@@ -1,0 +1,23 @@
+{% extends "template.html.twig" %}
+{% block active %}hours{% endblock %}
+{% block content %}
+    <section class="content hours">
+        <header>
+            <h1>Office Hours</h1>
+        </header>
+        {% if me.is_adviser %}
+            <nav>
+                <ul>
+                    <li class="active"><a href="/hours">View Hours</a></li>
+                    <li><a href="/hours/create">Post Hours</a></li>
+                </ul>
+            </nav>
+        {% endif %}
+
+        {% if hours %}
+
+        {% else %}
+            <p>No slots available.</p>
+        {% endif %}
+    </section>
+{% endblock %}

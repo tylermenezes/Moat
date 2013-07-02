@@ -4,7 +4,7 @@ use \Moat\Traits;
 
 /**
  * Allows for creation, booking, and cancellation of office hours.
- * 
+ *
  * @author      Tyler Menezes <tylermenezes@gmail.com>
  * @copyright   Copyright (c) Tyler Menezes. Released under the BSD license.
  *
@@ -15,7 +15,7 @@ class hours {
 
     public function action_index()
     {
-        // TODO
+        echo \Moat::$twig->render('hours/view.html.twig');
     }
 
     public function post_book()
@@ -30,7 +30,7 @@ class hours {
 
     public function get_create()
     {
-        // TODO
+        echo \Moat::$twig->render('hours/create.html.twig');
     }
 
     public function post_create()

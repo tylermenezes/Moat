@@ -32,4 +32,14 @@ class Cohort extends \TinyDb\Orm {
                            ->join('companies ON (users_companies.companyID = companies.companyID)')
                            ->where('companies.cohortID = ?', $this->cohortID)->all();
     }
+
+    public function get_deals($only_approved = true)
+    {
+        $query = Deal::find()->where('cohortID = ? OR cohortID IS NULL', $this->id);
+        if ($only_approved) {
+            $query->where('approved = 1');
+        }
+
+        return $query->all();
+    }
 }

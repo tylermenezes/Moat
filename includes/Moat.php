@@ -16,5 +16,7 @@ class Moat extends \Jetpack\App
         if (\Moat\Models\User::is_logged_in()) {
             static::$twig->addGlobal('me', \Moat\Models\User::me());
         }
+
+        static::$twig->addGlobal('cohorts', \Moat\Models\Cohort::find()->order_by('cohortID DESC')->all());
     }
 }

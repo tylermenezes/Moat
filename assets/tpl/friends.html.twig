@@ -1,0 +1,31 @@
+{% extends "template.html.twig" %}
+{% block active %}friends{% endblock %}
+
+{% block content %}
+    <section class="content friends">
+        <header>
+            <h1>Friends</h1>
+        </header>
+
+        <table>
+            <thead>
+                <tr>
+                    <td class="name">Name</td>
+                    <td class="facebook">Facebook</td>
+                    <td class="twitter">Twitter</td>
+                    <td class="linkedin">LinkedIn</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for member in current_cohort.members %}
+                    <tr>
+                        <td class="name"><img src="{{ member.photo }}" />{{ member.name }}</td>
+                        <td class="facebook"></td>
+                        <td class="twitter"></td>
+                        <td class="linkedin"></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+{% endblock %}

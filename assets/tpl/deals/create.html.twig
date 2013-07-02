@@ -1,0 +1,63 @@
+{% extends "template.html.twig" %}
+{% block active %}deals{% endblock %}
+{% block content %}
+    {% if missing_fields %}
+        <section class="warning">
+            All fields are required.
+        </section>
+    {% endif %}
+
+    <section class="content deals">
+        <header>
+            <h1>Submit a deal</h1>
+        </header>
+
+        {% if me %}
+            <nav>
+                <ul>
+                    <li><a href="/deals">All Deals</a></li>
+                    <li class="active"><a href="/deals/submit">Create Deal</a></li>
+                </ul>
+            </nav>
+        {% endif %}
+
+        <form method="post">
+            <div class="field">
+                <label for="company">Company</label>
+                <input type="text" name="company" value="{{ company }}" required />
+                <span class="help">The name of your company</span>
+            </div>
+
+            <div class="field">
+                <label for="url">URL</label>
+                <input type="text" name="url" value="{{ url }}" required />
+                <span class="help">The URL of your company's website</span>
+            </div>
+
+            <div class="field">
+                <label for="details">Deal Details</label>
+                <textarea name="details" required>{{ details }}</textarea>
+                <span class="help">Explain what the deal is (e.g. what's being offered, what is the discount, etc)</span>
+            </div>
+
+            <div class="field">
+                <label for="redemption">Redemption Details</label>
+                <textarea name="redemption" required>{{ redemption }}</textarea>
+                <span class="help">Explain how to redeem the deal.</span>
+            </div>
+
+            <div class="field">
+                <label for="cohort">Cohort</label>
+                <select name="cohort" required>
+                    <option value="all">All Cohorts</option>
+                    {% for cohort in cohorts %}
+                        <option value="{{ cohort.id }}">{{ cohort.name }}</option>
+                    {% endfor %}
+                </select>
+                <span class="help">Which cohort would you like the deal to apply to?</span>
+            </div>
+
+            <input type="submit" value="Submit Deal" />
+        </form>
+    </section>
+{% endblock %}

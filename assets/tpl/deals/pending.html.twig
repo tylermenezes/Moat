@@ -1,0 +1,20 @@
+{% extends "template.html.twig" %}
+{% block active %}deals{% endblock %}
+{% block content %}
+    <section class="content">
+        <header>
+            <h1>Submit a deal</h1>
+        </header>
+
+        {% if me %}
+            <nav>
+                <ul>
+                    <li><a href="/deals">All Deals</a></li>
+                    <li class="active"><a href="/deals/submit">Create Deal</a></li>
+                </ul>
+            </nav>
+        {% endif %}
+
+        <p>Thanks, your deal was submitted, and is now waiting for approval from an admin.</p>
+    </section>
+{% endblock %}

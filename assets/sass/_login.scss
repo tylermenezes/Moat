@@ -1,21 +1,46 @@
-form.login
+section.login
 {
-    width: 15em;
-    margin: 0 auto;
-    padding: 1em;
-
-    p:first-child::before {
-        content: "";
-        display: block;
-        width: 6em;
-        height: 6em;
-        margin: 0 auto;
-        background-color: red;
-        margin-bottom: 1em;
+    section {
+        float: left;
+        width: 25em;
     }
 
-    input {
-        width: 100%;
-        margin: 0;
+    form {
+        width: 15em;
+        padding: 1em;
+        float: left;
+        padding-top: 0;
+
+        input[type="text"], input[type="password"] {
+            width: 14em;
+        }
+
+        input[name="username"] {
+            border-bottom: none;
+            @include rounded(3px, 3px, 0, 0);
+        }
+
+        input[name="password"] {
+            @include rounded(0);
+        }
+
+        input[type="submit"] {
+            @include rounded(0, 0, 3px, 3px);
+            width: 12.6em;
+            padding: inherit 0;
+        }
+
+        h1 {
+            margin-top: 0;
+            width: 100%;
+            text-align: center;
+            font-family: "brandon-grotesque", sans-serif;
+            text-transform: uppercase;
+        }
+
+        input {
+            width: 100%;
+            margin: 0;
+        }
     }
 }

@@ -20,7 +20,7 @@ trait NeedsCohort {
             if (count(Models\User::me()->companies) > 0) {
                 // Pick their most recent company
                 $companies = Models\User::me()->companies;
-                $companies[count($companies) - 1]->set_current();
+                $companies[count($companies) - 1]->cohort->set_current();
             } else {
                 // Pick the most recent cohort
                 Models\Cohort::find()->order_by('cohortID DESC')->one()->set_current();
@@ -29,6 +29,5 @@ trait NeedsCohort {
 
         // Set the cohort in Twig
         \Moat::$twig->addGlobal('current_cohort', Models\Cohort::current());
-        \Moat::$twig->addGlobal('cohorts', Models\Cohort::find()->order_by('cohortID DESC')->all());
     }
 }

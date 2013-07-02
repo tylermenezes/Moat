@@ -174,5 +174,36 @@ class db {
                 ]
             ]);
         }
+
+        if (!\TinyDb\Query::table_exists('deals')) {
+            echo "  * Creating table deals.\n";
+            \TinyDb\Query::create_table('deals', [
+                'dealID' => [
+                    'type' => 'int',
+                    'auto_increment' => true,
+                    'key' => 'primary'
+                ],
+                'company' => [
+                    'type' => 'varchar(255)'
+                ],
+                'url' => [
+                    'type' => 'varchar(255)'
+                ],
+                'details' => [
+                    'type' => 'text'
+                ],
+                'redemption' => [
+                    'type' => 'text'
+                ],
+                'approved' => [
+                    'type' => 'bool',
+                    'default' => false
+                ],
+                'cohortID' => [
+                    'type' => 'int',
+                    'null' => true
+                ]
+            ]);
+        }
     }
 }

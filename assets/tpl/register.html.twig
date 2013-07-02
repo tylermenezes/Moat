@@ -1,4 +1,5 @@
 {% extends "template.html.twig" %}
+{% block active %}register{% endblock %}
 {% block content %}
     {% if username_taken %}
         <section class="warning">
@@ -20,38 +21,34 @@
         <section class="warning">
             Something looks weird with your email...
         </section>
-    {% else  %}
-        {% set no_error = true %}
     {% endif %}
 
     <section class="content register">
-        {% if no_error %}
-            <header>
-                <h1>We're excited to see you're here. Let's get started.</h1>
-            </header>
-        {% endif %}
+        <header>
+            <h1>We're excited to see you're here. Let's get started.</h1>
+        </header>
 
         <form method="post">
             <h2>Login</h2>
             <p>How can we authenticate you?</p>
             <fieldset class="login">
-                <input type="text" name="username" value="{{ username }}" placeholder="Username" />
-                <input type="password" name="password" value="" placeholder="Password" />
-                <input type="password" name="password_confirm" value="" placeholder="Password, once more" />
+                <input type="text" name="username" value="{{ username }}" placeholder="Username" required />
+                <input type="password" name="password" value="" placeholder="Password" required />
+                <input type="password" name="password_confirm" value="" placeholder="Password, once more" required />
             </fieldset>
 
             <h2>Your Name</h2>
             <p>We have such a bad memory for names; what was yours, again?</p>
             <fieldset class="name">
-                <input type="text" name="first_name" value="{{ first_name }}" placeholder="First Name" />
-                <input type="text" name="last_name" value="{{ last_name }}" placeholder="Last Name" />
+                <input type="text" name="first_name" value="{{ first_name }}" placeholder="First Name" required />
+                <input type="text" name="last_name" value="{{ last_name }}" placeholder="Last Name" required />
             </fieldset>
 
             <h2>Contact</h2>
             <p>This information will only be available internally, never publicly.</p>
             <fieldset class="contact">
-                <input type="text" name="phone" value="{{ phone }}" placeholder="(555) 555-5555" />
-                <input type="text" name="email" value="{{ email }}" placeholder="me@me.com" />
+                <input type="text" name="phone" value="{{ phone }}" placeholder="(555) 555-5555" required />
+                <input type="text" name="email" value="{{ email }}" placeholder="me@me.com" required />
             </fieldset>
 
             <input type="submit" value="Engage!" />

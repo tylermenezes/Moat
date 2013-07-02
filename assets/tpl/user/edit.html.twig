@@ -1,5 +1,19 @@
 {% extends "template.html.twig" %}
 {% block content %}
+    {% if missing_field %}
+        <section class="warning">
+            All fields are required.
+        </section>
+    {% elseif invalid_email %}
+        <section class="warning">
+            Something looks weird with that email...
+        </section>
+    {% elseif invalid_phone %}
+        <section class="warning">
+            Something looks weird with that phone number...
+        </section>
+    {% endif %}
+
     <section class="user edit content">
         <header>
             <h1>
@@ -12,25 +26,30 @@
         </header>
 
         {% if me.username == user.username %}
-            <a href="/user/link">Link Social Media</a>
+            <nav>
+                <ul>
+                    <li class="active"><a href="/user/{{ user.username }}">Profile Information</a></li>
+                    <li><a href="/user/link">Social Media</a></li>
+                </ul>
+            </nav>
         {% endif %}
 
         <form method="post">
             {% if me.is_admin %}
                 <h2>Login</h2>
-                <input type="text" name="username" value="{{ user.username }}" placeholder="Username" />
+                <input type="text" name="username" value="{{ user.username }}" placeholder="Username" required />
             {% endif %}
 
             <h2>Name</h2>
             <fieldset class="name">
-                <input type="text" name="first_name" value="{{ user.first_name }}" placeholder="First Name" />
-                <input type="text" name="last_name" value="{{ user.last_name }}" placeholder="Last Name" />
+                <input type="text" name="first_name" value="{{ user.first_name }}" placeholder="First Name" required />
+                <input type="text" name="last_name" value="{{ user.last_name }}" placeholder="Last Name" required />
             </fieldset>
 
             <h2>Contact</h2>
             <fieldset class="contact">
-                <input type="text" name="phone" value="{{ user.phone }}" placeholder="(555) 555-5555" />
-                <input type="text" name="email" value="{{ user.email }}" placeholder="me@me.com" />
+                <input type="text" name="phone" value="{{ user.phone }}" placeholder="(555) 555-5555" required />
+                <input type="email" name="email" value="{{ user.email }}" placeholder="me@me.com" required />
             </fieldset>
 
             <input type="submit" value="Update" />

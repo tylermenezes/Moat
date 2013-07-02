@@ -17,7 +17,7 @@ class friends {
 
     public function action_index()
     {
-        // TODO
+        echo \Moat::$twig->render('friends.html.twig');
     }
 
 }

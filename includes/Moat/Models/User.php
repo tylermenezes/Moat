@@ -65,7 +65,7 @@ class User extends \TinyDb\Orm
 
     public function get_has_photo()
     {
-        return $this->photo === null;
+        return $this->photo !== null;
     }
 
     public function get_name()
