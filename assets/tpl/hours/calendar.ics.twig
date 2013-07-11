@@ -1,0 +1,32 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//TylerMenezes//Moat//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+{% for block in upcoming_blocks %}
+{% for slot in block.slots %}
+BEGIN:VEVENT
+UID:{{ slot.id }}@{{ me.username }}.moat
+DTSTAMP;TZID={{ slot.starts_at|date('e') }}:{{ slot.starts_at|date('Ymd\\TH-i-s') }}
+ORGANIZER;CN={{ slot.user.name }}:MAILTO:{{ slot.user.email }}
+DTSTART;TZID={{ slot.starts_at|date('e') }}:{{ slot.starts_at|date('Ymd\\TH-i-s') }}
+DTEND;TZID={{ slot.ends_at|date('e') }}:{{ slot.ends_at|date('Ymd\\TH-i-s') }}
+{% if slot.user %}
+STATUS:CONFIRMED
+SUMMARY:Hours w/ {{ slot.user.name }}
+CLASS:PUBLIC
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN={{ slot.user.name }};X-NUM-GUESTS=0:mailto:{{ slot.user.email }}
+BEGIN:VALARM
+DESCRIPTION:Hours w/ {{ slot.user.name }}
+TRIGGER;RELATED=START:-PT5M
+ACTION:DISPLAY
+END:VALARM
+{% else %}
+STATUS:TENTATIVE
+SUMMARY:Open Hours Block
+CLASS:PUBLIC
+{% endif %}
+END:VEVENT
+{% endfor %}
+{% endfor %}
+END:VCALENDAR

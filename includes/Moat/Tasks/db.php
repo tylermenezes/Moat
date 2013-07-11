@@ -245,6 +245,9 @@ class db {
                 'starts_at' => [
                     'type' => 'datetime'
                 ],
+                'ends_at' => [
+                    'type' => 'datetime'
+                ],
                 'userID' => [
                     'type' => 'int',
                     'null' => true

@@ -21,6 +21,7 @@ class Slot extends \TinyDb\Orm {
      */
     public $blockID;
     public $starts_at;
+    public $ends_at;
 
     /**
      * @foreign \Moat\Models\User user

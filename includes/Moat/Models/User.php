@@ -30,6 +30,13 @@ class User extends \TinyDb\Orm
     public $created_at;
     public $modified_at;
 
+    public function get_signature_fragment()
+    {
+        $hmac = hash_hmac('sha512', $this->username, $this->password);
+        $enc = base64_encode(implode('$', ['sha512', $hmac]));
+        return implode('&', ['username=' . urlencode($this->username), 'signature=' . urlencode($enc)]);
+    }
+
     public function friends_with($network, $user)
     {
         if ($this->get_oauth($network) === null || $user->get_oauth($network) === null) {

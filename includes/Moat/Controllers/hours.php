@@ -21,6 +21,14 @@ class hours {
         echo \Moat::$twig->render('hours/view.html.twig', ['upcoming_blocks' => $upcoming_hours]);
     }
 
+    public function action_index_ics()
+    {
+        header("Content-type: text/plain");
+        $upcoming_hours = OfficeHours\Block::find()->where('NOW() < DATE_ADD(starts_at, INTERVAL 1 DAY)')->
+            where('userID = ?', Models\User::me()->id)->order_by('starts_at ASC')->all();
+        echo \Moat::$twig->render('hours/calendar.ics.twig', ['upcoming_blocks' => $upcoming_hours]);
+    }
+
     public function get_book($slotID)
     {
         try {
@@ -99,7 +107,8 @@ class hours {
         for ($i = 0; $i < $number; $i++) {
             $slot = new OfficeHours\Slot([
                 'blockID' => $block->id,
-                'starts_at' => $time
+                'starts_at' => $time,
+                'ends_at' => $time + ($length * 60)
             ]);
             $time += $length * 60;
         }
