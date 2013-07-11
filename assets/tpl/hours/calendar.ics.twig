@@ -3,15 +3,16 @@ VERSION:2.0
 PRODID:-//TylerMenezes//Moat//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
+X-WR-CALNAME:Moat - {{ me.username }}
 {% for block in upcoming_blocks %}
 {% for slot in block.slots %}
 BEGIN:VEVENT
 UID:{{ slot.id }}@{{ me.username }}.moat
-DTSTAMP;TZID={{ slot.starts_at|date('e') }}:{{ slot.starts_at|date('Ymd\\TH-i-s') }}
-ORGANIZER;CN={{ slot.user.name }}:MAILTO:{{ slot.user.email }}
-DTSTART;TZID={{ slot.starts_at|date('e') }}:{{ slot.starts_at|date('Ymd\\TH-i-s') }}
-DTEND;TZID={{ slot.ends_at|date('e') }}:{{ slot.ends_at|date('Ymd\\TH-i-s') }}
+DTSTAMP:{{ null|date('Ymd\\THis') }}Z
+DTSTART;TZID={{ slot.starts_at|date('e') }}:{{ slot.starts_at|date('Ymd\\THis') }}
+DTEND;TZID={{ slot.ends_at|date('e') }}:{{ slot.ends_at|date('Ymd\\THis') }}
 {% if slot.user %}
+ORGANIZER;CN={{ slot.user.name }}:MAILTO:{{ slot.user.email }}
 STATUS:CONFIRMED
 SUMMARY:Hours w/ {{ slot.user.name }}
 CLASS:PUBLIC
@@ -22,6 +23,7 @@ TRIGGER;RELATED=START:-PT5M
 ACTION:DISPLAY
 END:VALARM
 {% else %}
+ORGANIZER;CN={{ me.name }}:MAILTO:{{ me.email }}
 STATUS:TENTATIVE
 SUMMARY:Open Hours Block
 CLASS:PUBLIC
