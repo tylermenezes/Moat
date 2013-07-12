@@ -933,5 +933,6 @@ section.hours ul.blocks > li {
         float: right; }
       section.hours ul.blocks > li ul.slots li:nth-child(even) {
         background-color: #efefef; }
-      section.hours ul.blocks > li ul.slots li.noshow .who {
-        color: #DA3610; }
+      section.hours ul.blocks > li ul.slots li.noshow .who a {
+        color: #DA3610;
+        text-decoration: line-through; }

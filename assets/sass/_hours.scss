@@ -76,8 +76,9 @@ section.hours {
                         background-color: #efefef;
                     }
 
-                    &.noshow .who {
+                    &.noshow .who a {
                         color: #DA3610;
+                        text-decoration: line-through;
                     }
                 }
             }
