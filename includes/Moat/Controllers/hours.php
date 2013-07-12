@@ -23,7 +23,10 @@ class hours {
 
     public function action_index_ics()
     {
-        header("Content-type: text/plain");
+        header("Content-Type: text/Calendar");
+        header("Content-Disposition: inline; filename=ical.ics");
+        header("Cache-Control: no-cache, must-revalidate");
+        header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
         $upcoming_hours = OfficeHours\Block::find()->where('userID = ?', Models\User::me()->id)->order_by('starts_at ASC')->all();
         echo \Moat::$twig->render('hours/calendar.ics.twig', ['upcoming_blocks' => $upcoming_hours]);
     }

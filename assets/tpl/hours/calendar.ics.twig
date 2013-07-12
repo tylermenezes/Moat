@@ -14,18 +14,20 @@ DTEND;TZID={{ slot.ends_at|date('e') }}:{{ slot.ends_at|date('Ymd\\THis') }}
 {% if slot.user %}
 ORGANIZER;CN={{ slot.user.name }}:MAILTO:{{ slot.user.email }}
 STATUS:CONFIRMED
-SUMMARY:Hours w/ {{ slot.user.name }}
+TRANSP:OPAQUE
+SUMMARY:{{ slot.user.name }} Hours
 CLASS:PUBLIC
 ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN={{ slot.user.name }};X-NUM-GUESTS=0:mailto:{{ slot.user.email }}
 BEGIN:VALARM
-DESCRIPTION:Hours w/ {{ slot.user.name }}
+DESCRIPTION:{{ slot.user.name }} Hours
 TRIGGER;RELATED=START:-PT5M
 ACTION:DISPLAY
 END:VALARM
 {% else %}
 ORGANIZER;CN={{ me.name }}:MAILTO:{{ me.email }}
 STATUS:TENTATIVE
-SUMMARY:Open Hours Block
+TRANSP:TRANSPARENT
+SUMMARY:Hours Slot
 CLASS:PUBLIC
 {% endif %}
 END:VEVENT
