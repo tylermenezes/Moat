@@ -882,6 +882,9 @@ section.hours ul.blocks > li {
     section.hours ul.blocks > li h2 img {
       width: 1em;
       height: 1em; }
+    section.hours ul.blocks > li h2 a {
+      color: #000;
+      text-decoration: none; }
   section.hours ul.blocks > li .action a, section.hours ul.blocks > li .admin a {
     border: 0;
     background-color: #e5e5e5;
@@ -919,6 +922,12 @@ section.hours ul.blocks > li {
       section.hours ul.blocks > li ul.slots li .who {
         display: inline-block;
         width: 10em; }
+        section.hours ul.blocks > li ul.slots li .who img {
+          width: 1em;
+          height: 1em; }
+        section.hours ul.blocks > li ul.slots li .who a {
+          color: #000;
+          text-decoration: none; }
       section.hours ul.blocks > li ul.slots li .action {
         display: inline-block;
         float: right; }

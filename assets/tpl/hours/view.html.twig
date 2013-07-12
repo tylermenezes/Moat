@@ -33,7 +33,14 @@
                             {% for slot in block.slots %}
                                 <li {% if slot.noshow %}class="noshow"{% endif %}>
                                     <span class="time">{{ slot.starts_at|date('g:i') }}</span>
-                                    <span class="who">{{ slot.user.name }}</span>
+                                    <span class="who">
+                                        {% if slot.user %}
+                                            <a href="/user/{{ slot.user.username }}">
+                                                <img src="{{ slot.user.photo_websafe }}" />
+                                                {{ slot.user.name}}
+                                            </a>
+                                        {% endif %}
+                                    </span>
                                     <span class="action">
                                         {% if slot.user.id == me.id and not slot.has_started %}
                                             <a href="/hours/release/{{ slot.id }}">Cancel</a>
