@@ -24,6 +24,7 @@ class cron {
             ->all();
 
         foreach ($upcoming_unnotified_hours as $slot) {
+            echo "Sending reminder email to " . $slot->user->email . "\n";
             mail($slot->user->email, 'Hours on '.date('M j', $slot->starts_at).' at '.date('g:i a', $slot->starts_at),
                 \Moat::$twig->render('emails/hours_reminder.txt.twig', ['slot' => $slot]),
                 'From: "Moat" <moat@studentrnd.org>');
