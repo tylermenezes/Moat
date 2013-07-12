@@ -17,7 +17,13 @@ class hours {
 
     public function action_index()
     {
-        $upcoming_hours = OfficeHours\Block::find()->where('NOW() < DATE_ADD(starts_at, INTERVAL 1 DAY)')->order_by('starts_at ASC')->all();
+        $upcoming_hours = OfficeHours\Block::find()->order_by('starts_at ASC');
+
+        if (!$this->request->get('all')) {
+            $upcoming_hours = $upcoming_hours->where('NOW() < DATE_ADD(starts_at, INTERVAL 1 DAY)');
+        }
+
+        $upcoming_hours = $upcoming_hours->all();
         echo \Moat::$twig->render('hours/view.html.twig', ['upcoming_blocks' => $upcoming_hours]);
     }
 
