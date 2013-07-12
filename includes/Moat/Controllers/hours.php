@@ -74,6 +74,10 @@ class hours {
             throw new \CuteControllers\HttpError(403);
         }
 
+        mail($slot->user->email, 'No-show for office hours',
+            \Moat::$twig->render('emails/hours_noshow.txt.twig', ['slot' => $slot]),
+            'From: "Moat" <moat@studentrnd.org>');
+
         $slot->noshow = true;
         $slot->update();
         $this->redirect('/hours');
