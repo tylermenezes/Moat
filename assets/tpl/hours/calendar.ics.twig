@@ -18,11 +18,13 @@ TRANSP:OPAQUE
 SUMMARY:{{ slot.user.name }} Hours
 CLASS:PUBLIC
 ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN={{ slot.user.name }};X-NUM-GUESTS=0:mailto:{{ slot.user.email }}
+{% if not slot.has_started %}
 BEGIN:VALARM
 DESCRIPTION:{{ slot.user.name }} Hours
 TRIGGER;RELATED=START:-PT5M
 ACTION:DISPLAY
 END:VALARM
+{% endif %}
 {% else %}
 ORGANIZER;CN={{ me.name }}:MAILTO:{{ me.email }}
 STATUS:TENTATIVE
