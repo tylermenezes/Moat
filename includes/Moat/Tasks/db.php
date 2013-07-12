@@ -200,7 +200,7 @@ class db {
                     'type' => 'text'
                 ],
                 'approved' => [
-                    'type' => 'bool',
+                    'type' => 'boolean',
                     'default' => false
                 ],
                 'cohortID' => [
@@ -252,8 +252,12 @@ class db {
                     'type' => 'int',
                     'null' => true
                 ],
+                'sent_reminder' => [
+                    'type' => 'boolean',
+                    'default' => false
+                ],
                 'noshow' => [
-                    'type' => 'bool',
+                    'type' => 'boolean',
                     'default' => false
                 ],
                 'created_at' => [

@@ -57,6 +57,7 @@ class hours {
         }
 
         $slot->userID = null;
+        $slot->sent_reminder = false;
         $slot->update();
         $this->redirect('/hours');
     }
