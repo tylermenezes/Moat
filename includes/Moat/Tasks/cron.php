@@ -17,7 +17,7 @@ class cron {
         // Event reminders
         $upcoming_unnotified_hours = Models\OfficeHours\Slot::find()
             ->where('NOW() < starts_at')
-            ->where('NOW() > DATE_SUB(starts_at, INTERVAL 1 HOUR)')
+            ->where('NOW() > DATE_SUB(starts_at, INTERVAL 2 HOUR)')
             ->where('sent_reminder = 0')
             ->where('userID IS NOT NULL')
             ->order_by('starts_at ASC')
