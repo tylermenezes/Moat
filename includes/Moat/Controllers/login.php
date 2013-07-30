@@ -34,7 +34,12 @@ class Login {
         }
 
         $user->login();
-        $this->redirect('/directory');
+
+        if ($user->password_reset_required) {
+            $this->redirect('/user/password/'.$user->username);
+        } else {
+            $this->redirect('/directory');
+        }
     }
 
     public function action_logout()

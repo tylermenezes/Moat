@@ -11,6 +11,18 @@ require_once('submodules/Jetpack/Jetpack/App.php');
  */
 class Moat extends \Jetpack\App
 {
+    public static function before()
+    {
+        $session_timeout = 60*60*24*31;
+        $session_dir = pathify(sys_get_temp_dir(), '.moat_sessions');
+        session_set_cookie_params($session_timeout);
+        ini_set('session.gc_maxlifetime',$session_timeout);
+        ini_set('session.save_path', $session_dir);
+
+        if (!is_dir($session_dir)) {
+            mkdir($session_dir);
+        }
+    }
     public static function after()
     {
         if (!is_cli()) {

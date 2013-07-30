@@ -27,6 +27,9 @@ class db {
                 'password' => [
                     'type' => 'text'
                 ],
+                'password_reset_required' => [
+                    'type' => 'boolean'
+                ],
                 'first_name' => [
                     'type' => 'varchar(255)'
                 ],

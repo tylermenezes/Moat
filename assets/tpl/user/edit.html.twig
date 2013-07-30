@@ -32,12 +32,14 @@
                         <li class="active"><a href="/user/edit/{{ user.username }}">Edit</a></li>
                         {% if me.username == user.username %}
                             <li><a href="/user/link">Social Media</a></li>
+                            <li><a href="/user/password/{{ user.username }}">Password</a></li>
                         {% endif %}
                         {% if me.is_admin and user.username != me.username %}
                             <li><a href="/user/impersonate/{{ user.username }}">Impersonate</a></li>
                         {% endif %}
                         {% if me.is_admin %}
                             <li><a href="/user/companies/{{ user.username }}">Companies</a></li>
+                            <li><a href="/user/reset_password/{{ user.username }}">Reset Password</a></li>
                         {% endif %}
                     </ul>
                 </nav>

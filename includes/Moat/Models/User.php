@@ -20,6 +20,7 @@ class User extends \TinyDb\Orm
 
     public $username;
     public $password;
+    public $password_reset_required;
     public $first_name;
     public $last_name;
     public $bio;
@@ -29,6 +30,25 @@ class User extends \TinyDb\Orm
 
     public $created_at;
     public $modified_at;
+
+    /**
+     * Resets the user's password
+     *
+     * @return string   The new password
+     */
+    public function reset_password()
+    {
+        $dict = file("/usr/share/dict/words");
+        $pass = rand(0,9);
+        while (strlen($pass) < 10) {
+            $pass .= ucfirst(preg_replace("/[^A-Za-z0-9 ]/", '', $dict[rand(0, count($dict) - 1)]));
+        }
+
+        $this->set_password($pass);
+        $this->password_reset_required = true;
+        $this->update();
+        return $pass;
+    }
 
     public function get_signature_fragment()
     {
