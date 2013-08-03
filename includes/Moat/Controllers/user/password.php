@@ -10,7 +10,7 @@ use \Moat\Traits;
  * @copyright   Copyright (c) Tyler Menezes. Released under the BSD license.
  *
  */
-class reset_password {
+class password {
     use \CuteControllers\Controller;
     use Traits\NeedsCohort;
     use Traits\NeedsLogin;
@@ -23,7 +23,7 @@ class reset_password {
             throw new \CuteControllers\HttpError(404);
         }
 
-        if ($user !== Models\User::me() && !Models\User::me()->is_admin) {
+        if ($user->id !== Models\User::me()->id && !Models\User::me()->is_admin) {
             throw new \CuteControllers\HttpError(403);
         }
 
@@ -38,7 +38,7 @@ class reset_password {
             throw new \CuteControllers\HttpError(404);
         }
 
-        if ($user !== Models\User::me() && !Models\User::me()->is_admin) {
+        if ($user->id !== Models\User::me()->id && !Models\User::me()->is_admin) {
             throw new \CuteControllers\HttpError(403);
         }
 
